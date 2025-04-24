@@ -1,21 +1,21 @@
 const incentives = [
   {
-    name: "Lorem ipsum 1",
+    name: "Глобален обхват",
     imageSrc: "/icons/cta-icon-1.svg",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Достъп до квалифицирани кадри от целия свят с доказан опит в разнообразни индустрии, готови да допринесат незабавно към вашия екип.",
   },
   {
-    name: "Lorem ipsum 2",
+    name: "Правна експертиза",
     imageSrc: "/icons/cta-icon-2.svg",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Пълно съдействие при всички правни и административни процедури за наемане на персонал от трети страни, със спазване на всички международни регулации.",
   },
   {
-    name: "Lorem ipsum 3",
+    name: "Персонализиран подход",
     imageSrc: "/icons/cta-icon-3.svg",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Индивидуално разработена стратегия за всеки клиент, отчитаща спецификите на вашия бизнес, корпоративна култура и нужди от специфични умения.",
   },
 ];
 
@@ -27,16 +27,18 @@ export default function Incentives() {
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
             <div>
               <h2 className="text-4xl font-bold tracking-tight text-white">
-                Lorem ipsum
+                Международни таланти на ваше разположение
               </h2>
               <p className="mt-4 text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Find Staff предлага цялостно решение за компании, търсещи
+                висококвалифицирани специалисти от международния пазар на труда.
+                Специализирани сме в идентифицирането и привличането на
+                професионалисти от бившите съветски републики, Филипините, Непал
+                и други развиващи се пазари, където има богат набор от таланти,
+                търсещи нови възможности. Нашият екип от експерти не само
+                подбира подходящите кандидати, но и осигурява плавен преход с
+                пълна административна и юридическа подкрепа в целия процес на
+                наемане и интеграция.
               </p>
             </div>
             <img
@@ -49,7 +51,7 @@ export default function Incentives() {
             {incentives.map((incentive) => (
               <div key={incentive.name} className="sm:flex lg:block">
                 <div className="sm:shrink-0">
-                  <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#129160]">
+                  <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#005e9e]">
                     <img
                       alt=""
                       src={incentive.imageSrc}

@@ -23,16 +23,18 @@ export default function Team() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-8xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl text-center">
-            Lorem ipsum
+            Екип от експерти
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Зад успеха на Find Staff стои екип от опитни професионалисти с богат
+            опит в международния подбор на персонал. Нашите консултанти владеят
+            множество езици и притежават задълбочени познания за пазарите на
+            труда в различни региони на света. Съчетаваме експертиза в човешките
+            ресурси, правни познания и разбиране на културните особености, за да
+            осигурим перфектно съответствие между компании и кандидати.
+            Поставяме акцент върху изграждането на дългосрочни отношения с
+            нашите клиенти, основани на доверие, професионализъм и постоянно
+            надминаване на очакванията.
           </p>
         </div>
         <ul

@@ -151,7 +151,7 @@ export default function Navigation() {
               </button>
               <div className="ml-4">
                 <Image
-                  src="/next-level-logo.png"
+                  src="/find-staff-logo.svg"
                   alt=""
                   width={180}
                   height={40}
@@ -180,7 +180,7 @@ export default function Navigation() {
                   {navigation.categories.map((category) => (
                     <Tab
                       key={category.name}
-                      className="flex-1 border-b-2 border-transparent px-1 py-4 text-xl font-bold text-center text-gray-900 hover:text-[#129160] data-headlessui-state-selected:border-[#129160] data-headlessui-state-selected:text-[#129160]"
+                      className="flex-1 border-b-2 border-transparent px-1 py-4 text-xl font-bold text-center text-gray-900 hover:text-[#005e9e] data-headlessui-state-selected:border-[#005e9e] data-headlessui-state-selected:text-[#005e9e]"
                     >
                       {category.name}
                     </Tab>
@@ -190,7 +190,7 @@ export default function Navigation() {
               {/* Loader */}
               {loading && (
                 <div className="flex justify-center py-10">
-                  <div className="w-12 h-12 border-4 border-gray-500 border-t-[#129160] rounded-full animate-spin"></div>
+                  <div className="w-12 h-12 border-4 border-gray-500 border-t-[#005e9e] rounded-full animate-spin"></div>
                 </div>
               )}
               {!loading && (
@@ -250,7 +250,7 @@ export default function Navigation() {
                     width={180}
                     height={40}
                     alt=""
-                    src="/next-level-logo.png"
+                    src="/find-staff-logo.svg"
                     className="w-auto transition-all duration-300 ease-in-out"
                   />
                 </Link>
@@ -275,7 +275,7 @@ export default function Navigation() {
                         {({ open, close }) => (
                           <>
                             <div className="relative flex">
-                              <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-open:border-[#129160] data-open:text-[#129160] cursor-pointer focus-visible:outline-none transition-all text-base">
+                              <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-open:border-[#005e9e] data-open:text-[#005e9e] cursor-pointer focus-visible:outline-none transition-all text-base">
                                 {category.name}
                                 <ChevronDownIcon
                                   className={`ml-2 h-5 w-5 text-gray-500 transition-transform duration-200 ease-in-out ${
@@ -297,7 +297,7 @@ export default function Navigation() {
                                   {/* Loader */}
                                   {loading && (
                                     <div className="flex justify-center py-10">
-                                      <div className="w-12 h-12 border-4 border-gray-500 border-t-[#129160] rounded-full animate-spin"></div>
+                                      <div className="w-12 h-12 border-4 border-gray-500 border-t-[#005e9e] rounded-full animate-spin"></div>
                                     </div>
                                   )}
                                   {!loading && (
@@ -328,7 +328,7 @@ export default function Navigation() {
                                               prefetch={true}
                                               onClick={close}
                                             >
-                                              <p className="text-lg font-semibold text-gray-900 transition-colors duration-300 hover:text-[#129160]">
+                                              <p className="text-lg font-semibold text-gray-900 transition-colors duration-300 hover:text-[#005e9e]">
                                                 {service.name}
                                               </p>
                                             </Link>
@@ -367,7 +367,7 @@ export default function Navigation() {
                         setShowResults(true);
                       }
                     }}
-                    className="block w-full px-3 pr-10 text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#129160] py-1 text-sm sm:text-base lg:text-base"
+                    className="block w-full px-3 pr-10 text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#005e9e] py-1 text-sm sm:text-base lg:text-base"
                   />
                   <MagnifyingGlassIcon className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 h-5 w-5" />
                 </div>
@@ -391,7 +391,7 @@ export default function Navigation() {
                           >
                             <Link
                               href={`/${result.type}/${result.slug}`}
-                              className="block w-full h-full p-1 sm:p-2 text-gray-900 hover:text-[#129160]"
+                              className="block w-full h-full p-1 sm:p-2 text-gray-900 hover:text-[#005e9e]"
                               prefetch={true}
                             >
                               {result.title}

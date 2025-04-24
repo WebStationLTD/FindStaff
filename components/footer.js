@@ -1,40 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Pacifico } from "next/font/google";
 import useSubscribe from "../hooks/useSubscribe";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
-
-const pacifico = Pacifico({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400"],
-  style: ["normal"],
-  display: "swap",
-});
+import Link from "next/link";
+import { getServicesNav } from "../services/services";
 
 const navigation = {
-  solutions: [
-    { name: "Marketing", href: "#" },
-    { name: "Analytics", href: "#" },
-    { name: "Automation", href: "#" },
-    { name: "Commerce", href: "#" },
-    { name: "Insights", href: "#" },
-  ],
-  support: [
-    { name: "Submit ticket", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Guides", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Jobs", href: "#" },
-    { name: "Press", href: "#" },
+  pages: [
+    { name: "Начало", href: "/" },
+    { name: "Екип", href: "/team" },
+    { name: "Блог", href: "/blog" },
+    { name: "Контакти", href: "/contact" },
   ],
   legal: [
-    { name: "Terms of service", href: "#" },
-    { name: "Privacy policy", href: "#" },
-    { name: "License", href: "#" },
+    { name: "Условия за ползване", href: "#" },
+    { name: "Политика за поверителност", href: "/privacy-policy" },
   ],
   social: [
     {
@@ -58,6 +39,8 @@ export default function Footer() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [email, setEmail] = useState("");
   const { subscribe, loading } = useSubscribe();
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,6 +58,52 @@ export default function Footer() {
     return () => clearInterval(interval);
   }, [year]);
 
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setServicesLoading(true);
+        const servicesData = await getServicesNav();
+        if (servicesData && Array.isArray(servicesData)) {
+          const formattedServices = servicesData.map((service) => ({
+            name: service.title.rendered,
+            href: `/services/${service.slug}`,
+          }));
+          setServices(formattedServices);
+        }
+        setServicesLoading(false);
+      } catch (error) {
+        console.error("Error fetching services for footer:", error);
+        setServicesLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  // Function to chunk the services array into columns
+  const getServiceColumns = (services, columns = 2) => {
+    if (!services || !services.length) return [];
+
+    const itemsPerColumn = Math.ceil(services.length / columns);
+    const result = [];
+
+    for (let i = 0; i < columns; i++) {
+      const startIndex = i * itemsPerColumn;
+      const columnServices = services.slice(
+        startIndex,
+        startIndex + itemsPerColumn
+      );
+      if (columnServices.length > 0) {
+        result.push(columnServices);
+      }
+    }
+
+    return result;
+  };
+
+  // Get service columns based on responsive layout
+  const serviceColumns = getServiceColumns(services, 2);
+
   return (
     <footer className="relative bg-white border border-t-[#eaeaea]">
       <div className="absolute right-0 top-0 bottom-0 z-10 w-1/3 h-full flex items-center justify-center pointer-events-none">
@@ -87,20 +116,20 @@ export default function Footer() {
         >
           <path
             d="M80 0 C160 150, 340 250, 420 400 S480 600, 350 800"
-            stroke="#129160"
+            stroke="#005e9e"
             strokeWidth="1.5"
             fill="none"
           />
           <path
             d="M140 0 C180 170, 320 270, 440 420 S500 650, 320 800"
-            stroke="#129160"
+            stroke="#005e9e"
             strokeWidth="1.2"
             opacity="0.8"
             fill="none"
           />
           <path
             d="M200 0 C200 190, 300 290, 460 440 S520 700, 290 800"
-            stroke="#129160"
+            stroke="#005e9e"
             strokeWidth="1"
             opacity="0.6"
             fill="none"
@@ -110,77 +139,92 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div>
-            <img alt="" src="/next-level-logo.png" width={180} height={40} />
+            <img
+              alt="Find Staff"
+              src="/find-staff-logo.svg"
+              width={180}
+              height={40}
+            />
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+          <div className="mt-16 grid xl:col-span-2 xl:mt-0">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {/* Страници колона */}
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Solutions
+                  Страници
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {navigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
+                  {navigation.pages.map((page) => (
+                    <li key={page.name}>
+                      <Link
+                        href={page.href}
                         className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        prefetch={true}
                       >
-                        {item.name}
-                      </a>
+                        {page.name}
+                      </Link>
                     </li>
                   ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Support
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Company
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
+
+                  {/* Правна информация в същата колона */}
+                  <li className="pt-6 mt-6 border-t border-gray-100">
+                    <h3 className="text-sm/6 font-semibold text-gray-900">
+                      Правна информация
+                    </h3>
+                  </li>
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        prefetch={true}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Услуги колона */}
+              <div>
+                <h3 className="text-sm/6 font-semibold text-gray-900">
+                  Услуги
+                </h3>
+                {servicesLoading ? (
+                  <div className="mt-6 flex items-center justify-center">
+                    <div className="w-6 h-6 border-2 border-gray-400 border-t-[#005e9e] rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+                    {serviceColumns.map((column, columnIndex) => (
+                      <div key={columnIndex} className="space-y-4">
+                        {column.map((service) => (
+                          <div key={service.name}>
+                            <Link
+                              href={service.href}
+                              className="text-sm/6 text-gray-600 hover:text-gray-900"
+                              prefetch={true}
+                            >
+                              {service.name}
+                            </Link>
+                          </div>
+                        ))}
+                        {columnIndex === serviceColumns.length - 1 && (
+                          <div className="pt-2">
+                            <Link
+                              href="/services"
+                              className="text-sm/6 font-medium text-[#005e9e] hover:text-gray-900"
+                              prefetch={true}
+                            >
+                              Всички услуги →
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -197,7 +241,7 @@ export default function Footer() {
           </div>
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 z-10 pointer-events-none">
-              <div className="w-12 h-12 border-4 border-gray-400 border-t-[#129160] rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-gray-400 border-t-[#005e9e] rounded-full animate-spin"></div>
             </div>
           )}
           <form
@@ -223,7 +267,7 @@ export default function Footer() {
             <div className="mt-4 sm:mt-0 sm:ml-4 sm:shrink-0">
               <button
                 type="submit"
-                className="flex w-full items-center justify-center rounded-md bg-[#129160] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3 py-2 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full items-center justify-center rounded-md bg-[#005e9e] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Абонирайте се
               </button>
@@ -246,7 +290,7 @@ export default function Footer() {
             ))}
           </div>
           <p className="mt-8 text-sm/6 text-gray-600 md:order-1 md:mt-0">
-            &copy; {year} NextLevel Theme, Inc. All rights reserved.
+            &copy; {year} Find Staff, Inc. All rights reserved.
           </p>
         </div>
       </div>

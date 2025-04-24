@@ -29,7 +29,7 @@ export default function LatestPosts() {
           {/* Loader */}
           {loading && (
             <div className="flex justify-center mt-10">
-              <div className="w-12 h-12 border-4 border-gray-500 border-t-[#129160] rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-gray-500 border-t-[#005e9e] rounded-full animate-spin"></div>
             </div>
           )}
 
@@ -125,8 +125,8 @@ export default function LatestPosts() {
             />
             <defs>
               <radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
-                <stop stopColor="#129160" />
-                <stop offset={1} stopColor="#129160" />
+                <stop stopColor="#005e9e" />
+                <stop offset={1} stopColor="#005e9e" />
               </radialGradient>
             </defs>
           </svg>
