@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import useSubscribe from "../hooks/useSubscribe";
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { getServicesNav } from "../services/services";
 
@@ -19,16 +19,9 @@ const navigation = {
   ],
   social: [
     {
-      name: "Facebook",
-      href: "https://www.facebook.com/example",
-      icon: FaFacebook,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/example",
-      icon: FaLinkedin,
+      name: "Instagram",
+      href: "#",
+      icon: FaInstagram,
       target: "_blank",
       rel: "noopener noreferrer",
     },
