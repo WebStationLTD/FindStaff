@@ -114,7 +114,7 @@ export default function LatestPosts() {
           <svg
             viewBox="0 0 1024 1024"
             aria-hidden="true"
-            className="absolute -left-20 -bottom-140 -z-10 size-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
+            className="absolute -right-20 -top-140 -z-10 size-[64rem] translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
           >
             <circle
               r={512}

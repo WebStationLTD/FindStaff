@@ -108,208 +108,127 @@ export default function Footer() {
     <footer className="relative bg-white border border-t-[#eaeaea]">
       <div className="absolute left-0 top-0 bottom-0 z-10 w-1/3 h-full flex items-center justify-center pointer-events-none">
         <svg
-          className="absolute w-full h-full opacity-100 hidden md:block sm:viewBox-[-150_0_500_1000] md:viewBox-[-150_0_500_800] lg:viewBox-[0_0_500_800]"
+          className="absolute w-full h-full opacity-80 hidden md:block sm:viewBox-[-150_0_500_1000] md:viewBox-[-150_0_500_800] lg:viewBox-[0_0_500_800]"
           viewBox="0 0 500 800"
           fill="none"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Абстрактен деликатен дизайн с линии */}
-          <line
-            x1="17"
-            y1="0"
-            x2="483"
-            y2="800"
+          {/* Вариант 2: Модерен дизайн с кръгове и точки */}
+          <circle
+            cx="150"
+            cy="150"
+            r="100"
             stroke="#005e9e"
-            strokeWidth="0.8"
+            strokeWidth="1"
             opacity="0.2"
           />
-          <line
-            x1="96"
-            y1="0"
-            x2="337"
-            y2="800"
+          <circle
+            cx="150"
+            cy="150"
+            r="80"
             stroke="#005e9e"
-            strokeWidth="0.7"
-            opacity="0.15"
+            strokeWidth="1"
+            opacity="0.3"
           />
-          <line
-            x1="204"
-            y1="0"
-            x2="291"
-            y2="800"
+          <circle
+            cx="150"
+            cy="150"
+            r="60"
             stroke="#005e9e"
-            strokeWidth="0.5"
-            opacity="0.12"
+            strokeWidth="1"
+            opacity="0.4"
           />
-          <line
-            x1="262"
-            y1="0"
-            x2="452"
-            y2="800"
+          <circle
+            cx="150"
+            cy="150"
+            r="40"
             stroke="#005e9e"
-            strokeWidth="0.4"
-            opacity="0.1"
-          />
-          <line
-            x1="307"
-            y1="0"
-            x2="133"
-            y2="800"
-            stroke="#005e9e"
-            strokeWidth="0.6"
-            opacity="0.18"
-          />
-          <line
-            x1="352"
-            y1="0"
-            x2="63"
-            y2="800"
-            stroke="#005e9e"
-            strokeWidth="0.5"
-            opacity="0.15"
-          />
-          <line
-            x1="437"
-            y1="0"
-            x2="31"
-            y2="800"
-            stroke="#005e9e"
-            strokeWidth="0.4"
-            opacity="0.12"
-          />
-          <line
-            x1="155"
-            y1="0"
-            x2="267"
-            y2="800"
-            stroke="#005e9e"
-            strokeWidth="0.35"
-            opacity="0.11"
-          />
-          <line
-            x1="394"
-            y1="0"
-            x2="109"
-            y2="800"
-            stroke="#005e9e"
-            strokeWidth="0.45"
-            opacity="0.13"
+            strokeWidth="1"
+            opacity="0.5"
           />
 
-          {/* Хоризонтални линии за повече абстракция */}
-          <line
-            x1="9"
-            y1="158"
-            x2="427"
-            y2="158"
+          <circle
+            cx="250"
+            cy="400"
+            r="120"
             stroke="#005e9e"
-            strokeWidth="0.3"
-            opacity="0.08"
+            strokeWidth="1"
+            opacity="0.2"
           />
-          <line
-            x1="38"
-            y1="416"
-            x2="389"
-            y2="416"
+          <circle
+            cx="250"
+            cy="400"
+            r="100"
             stroke="#005e9e"
-            strokeWidth="0.3"
-            opacity="0.06"
+            strokeWidth="1"
+            opacity="0.3"
           />
-          <line
-            x1="112"
-            y1="631"
-            x2="372"
-            y2="631"
+          <circle
+            cx="250"
+            cy="400"
+            r="80"
             stroke="#005e9e"
-            strokeWidth="0.3"
-            opacity="0.07"
+            strokeWidth="1"
+            opacity="0.4"
           />
-          <line
-            x1="68"
-            y1="346"
-            x2="402"
-            y2="346"
+          <circle
+            cx="250"
+            cy="400"
+            r="60"
             stroke="#005e9e"
-            strokeWidth="0.25"
-            opacity="0.05"
+            strokeWidth="1"
+            opacity="0.5"
           />
 
-          {/* Малко диагонали в другата посока */}
-          <line
-            x1="28"
-            y1="800"
-            x2="397"
-            y2="0"
+          <circle
+            cx="150"
+            cy="650"
+            r="80"
             stroke="#005e9e"
-            strokeWidth="0.6"
-            opacity="0.1"
+            strokeWidth="1"
+            opacity="0.2"
           />
-          <line
-            x1="137"
-            y1="800"
-            x2="257"
-            y2="0"
+          <circle
+            cx="150"
+            cy="650"
+            r="60"
             stroke="#005e9e"
-            strokeWidth="0.5"
-            opacity="0.08"
+            strokeWidth="1"
+            opacity="0.3"
           />
-          <line
-            x1="246"
-            y1="800"
-            x2="362"
-            y2="0"
+          <circle
+            cx="150"
+            cy="650"
+            r="40"
             stroke="#005e9e"
-            strokeWidth="0.4"
-            opacity="0.07"
+            strokeWidth="1"
+            opacity="0.4"
           />
 
-          {/* Няколко къси линии за повече абстракция */}
-          <line
-            x1="32"
-            y1="289"
-            x2="237"
-            y2="383"
-            stroke="#005e9e"
-            strokeWidth="0.4"
-            opacity="0.1"
-          />
-          <line
-            x1="273"
-            y1="481"
-            x2="447"
-            y2="323"
-            stroke="#005e9e"
-            strokeWidth="0.35"
-            opacity="0.08"
-          />
-          <line
-            x1="153"
-            y1="147"
-            x2="281"
-            y2="291"
-            stroke="#005e9e"
-            strokeWidth="0.3"
-            opacity="0.05"
-          />
-          <line
-            x1="297"
-            y1="734"
-            x2="392"
-            y2="576"
-            stroke="#005e9e"
-            strokeWidth="0.35"
-            opacity="0.07"
-          />
-          <line
-            x1="83"
-            y1="553"
-            x2="173"
-            y2="429"
-            stroke="#005e9e"
-            strokeWidth="0.3"
-            opacity="0.06"
-          />
+          {/* Фиксирани точки за модерен ефект */}
+          <circle cx="80" cy="100" r="2" fill="#005e9e" opacity="0.4" />
+          <circle cx="120" cy="220" r="3" fill="#005e9e" opacity="0.5" />
+          <circle cx="200" cy="180" r="1.5" fill="#005e9e" opacity="0.3" />
+          <circle cx="250" cy="120" r="2.5" fill="#005e9e" opacity="0.6" />
+          <circle cx="300" cy="200" r="2" fill="#005e9e" opacity="0.4" />
+          <circle cx="350" cy="150" r="1" fill="#005e9e" opacity="0.3" />
+          <circle cx="400" cy="100" r="3" fill="#005e9e" opacity="0.5" />
+
+          <circle cx="100" cy="350" r="2.5" fill="#005e9e" opacity="0.5" />
+          <circle cx="150" cy="380" r="1.5" fill="#005e9e" opacity="0.3" />
+          <circle cx="200" cy="450" r="3" fill="#005e9e" opacity="0.4" />
+          <circle cx="300" cy="420" r="2" fill="#005e9e" opacity="0.6" />
+          <circle cx="350" cy="380" r="1" fill="#005e9e" opacity="0.3" />
+          <circle cx="380" cy="450" r="1.5" fill="#005e9e" opacity="0.4" />
+
+          <circle cx="90" cy="550" r="3" fill="#005e9e" opacity="0.5" />
+          <circle cx="150" cy="580" r="2" fill="#005e9e" opacity="0.4" />
+          <circle cx="200" cy="620" r="1" fill="#005e9e" opacity="0.3" />
+          <circle cx="250" cy="700" r="2.5" fill="#005e9e" opacity="0.6" />
+          <circle cx="300" cy="600" r="1.5" fill="#005e9e" opacity="0.4" />
+          <circle cx="350" cy="680" r="2" fill="#005e9e" opacity="0.5" />
+          <circle cx="400" cy="750" r="1" fill="#005e9e" opacity="0.3" />
         </svg>
       </div>
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 sm:pt-24 lg:px-8 lg:pt-32">
