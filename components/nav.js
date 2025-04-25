@@ -219,6 +219,67 @@ export default function Navigation() {
                   />
                 </div>
               </div>
+
+              {/* Търсачка в мобилното меню */}
+              <div className="px-4 pt-2 pb-1">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Търсене..."
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowResults(true);
+                    }}
+                    onFocus={() => {
+                      if (searchQuery.length >= 3) {
+                        setShowResults(true);
+                      }
+                    }}
+                    className="block w-[98%] max-w-full px-2 pr-7 text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#005e9e] py-0.5 text-xs h-7"
+                    style={{ minHeight: "unset" }}
+                  />
+                  <MagnifyingGlassIcon className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 h-4 w-4" />
+                </div>
+
+                {showResults && open && (
+                  <div className="mt-1 bg-white shadow-lg rounded-md max-h-40 overflow-y-auto border border-gray-200">
+                    {isSearching ? (
+                      <div className="p-1 text-gray-500 text-xs text-center">
+                        Зареждане...
+                      </div>
+                    ) : searchResults.length > 0 ? (
+                      <ul className="divide-y divide-gray-200">
+                        {searchResults.map((result) => (
+                          <li
+                            key={result.id}
+                            className="p-0.5 hover:bg-gray-100"
+                            onClick={() => {
+                              setSearchQuery("");
+                              setSearchResults([]);
+                              setShowResults(false);
+                              setOpen(false);
+                            }}
+                          >
+                            <Link
+                              href={`/${result.type}/${result.slug}`}
+                              className="block w-full h-full px-1 py-0.5 text-gray-900 hover:text-[#005e9e] text-xs"
+                              prefetch={true}
+                            >
+                              {result.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="p-1 text-gray-500 text-xs text-center">
+                        Няма намерени резултати
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
               {/* Links */}
               <TabGroup className="mt-2">
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -302,16 +363,16 @@ export default function Navigation() {
                   <Bars3Icon aria-hidden="true" className="size-6" />
                 </button>
 
-                {/* Секция 1: Лого */}
-                <div className="w-1/4 lg:w-1/5 flex items-center justify-start">
+                {/* Секция 1: Лого - центрирано на мобилно, ляво на десктоп */}
+                <div className="flex-1 lg:w-1/5 flex items-center lg:justify-start justify-center">
                   <Link href="/" className="block">
-                    <span className="sr-only">NextLevel Theme</span>
+                    <span className="sr-only">FindStaff</span>
                     <Image
                       width={180}
                       height={40}
                       alt=""
                       src="/find-staff-logo.svg"
-                      className="w-auto transition-all duration-300 ease-in-out"
+                      className="w-auto h-10 lg:h-auto transition-all duration-300 ease-in-out"
                     />
                   </Link>
                 </div>
@@ -408,10 +469,10 @@ export default function Navigation() {
                   </PopoverGroup>
                 </div>
 
-                {/* Секция 3: Търсачка */}
+                {/* Секция 3: Търсачка - само за десктоп */}
                 <div
                   ref={searchRef}
-                  className="flex justify-end w-40 sm:w-44 lg:w-1/6"
+                  className="hidden lg:flex justify-end w-40 sm:w-44 lg:w-1/6"
                 >
                   <div className="relative w-full lg:w-72">
                     <input
@@ -467,6 +528,9 @@ export default function Navigation() {
                     </div>
                   )}
                 </div>
+
+                {/* Празен div за баланс при мобилни устройства (хамбургер меню вляво, логото в средата) */}
+                <div className="w-6 lg:hidden"></div>
               </div>
             </div>
           </nav>
