@@ -20,60 +20,60 @@ export default function Clients() {
               професионалисти, готови да допринесат за техния растеж и иновации.
             </p>
           </div>
-          <div className="mx-auto grid w-full max-w-xl grid-cols-2 items-center gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8">
+          <div className="mx-auto grid w-full max-w-xl grid-cols-2 items-center gap-y-2 sm:gap-y-2 lg:mx-0 lg:max-w-none lg:pl-8">
             <Image
-              alt="Tuple"
-              src="https://tailwindui.com/plus-assets/img/logos/tuple-logo-gray-900.svg"
-              width={105}
-              height={48}
+              alt="KFC"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/kfc-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
             <Image
-              alt="Reform"
-              src="https://tailwindui.com/plus-assets/img/logos/reform-logo-gray-900.svg"
-              width={104}
-              height={48}
+              alt="Action Aquapark Sunny Beach"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/action-aquapark-sunny-beach-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
             <Image
-              alt="SavvyCal"
-              src="https://tailwindui.com/plus-assets/img/logos/savvycal-logo-gray-900.svg"
-              width={140}
-              height={48}
+              alt="Radina's Way"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/radinas-way-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
             <Image
-              alt="Laravel"
-              src="https://tailwindui.com/plus-assets/img/logos/laravel-logo-gray-900.svg"
-              width={136}
-              height={48}
+              alt="Venid Yacht"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/venid-yacht-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
             <Image
-              alt="Transistor"
-              src="https://tailwindui.com/plus-assets/img/logos/transistor-logo-gray-900.svg"
-              width={158}
-              height={48}
+              alt="Car Rent"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/car-rent-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
             <Image
-              alt="Statamic"
-              src="https://tailwindui.com/plus-assets/img/logos/statamic-logo-gray-900.svg"
-              width={147}
-              height={48}
+              alt="Avtoserviz"
+              src="https://findstaff.admin-panels.com/wp-content/uploads/2025/04/avtoserviz-logo.jpg"
+              width={200}
+              height={200}
               quality={80}
               loading="lazy"
-              className="max-h-12 w-full object-contain object-left"
+              className="max-h-48 w-full object-contain object-left"
             />
           </div>
         </div>
