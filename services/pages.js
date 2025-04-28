@@ -21,3 +21,14 @@ export const getPageBySlug = cache(async (slug) => {
     next: { revalidate: 3600 }, // Обновяване на всеки час
   });
 });
+
+/**
+ * Get page by ID
+ * @param {number} id - Page ID
+ * @returns {Promise<Object|null>} - Page data
+ */
+export const getPageById = cache(async (id) => {
+  return await fetchAPI(`pages/${id}`, {
+    next: { revalidate: 3600 }, // Обновяване на всеки час
+  });
+});

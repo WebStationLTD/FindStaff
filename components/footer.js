@@ -9,6 +9,7 @@ import { getServicesNav } from "../services/services";
 const navigation = {
   pages: [
     { name: "Начало", href: "/" },
+    { name: "За нас", href: "/about" },
     { name: "Екип", href: "/team" },
     { name: "Блог", href: "/blog" },
     { name: "Контакти", href: "/contact" },
