@@ -2,7 +2,7 @@ import { getServiceBySlug } from "../../../services/services";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
-
+import ServiceForm from "@/components/ServiceForm";
 // Динамично зареждане на компоненти за по-добро разделяне на кода
 const ServiceContent = dynamic(
   () => import("../../../components/ServiceContent"),
@@ -141,6 +141,19 @@ export default async function ServicePage({ params }) {
             >
               <ServiceContent content={service[0].content.rendered} />
             </Suspense>
+            
+            <div className="mt-16">
+              <Suspense
+                fallback={
+                  <div className="animate-pulse h-96 bg-gray-100 rounded-md"></div>
+                }
+              >
+                <ServiceForm 
+                  serviceId={service[0].id} 
+                  serviceSlug={slug} 
+                />
+              </Suspense>
+            </div>
           </div>
         </div>
       </>
