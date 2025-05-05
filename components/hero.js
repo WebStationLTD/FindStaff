@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -78,18 +79,18 @@ export default function Example() {
                     движат бизнеса напред.
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
-                    <a
+                    <Link
                       href="/services"
                       className="rounded-md bg-[#005e9e] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Услуги
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/contact"
                       className="text-sm/6 font-semibold text-gray-900"
                     >
                       Контакти <span aria-hidden="true">→</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
