@@ -41,10 +41,6 @@ export default async function Blog({ searchParams }) {
               <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
                 От нашия блог
               </h1>
-              <p className="mt-6 text-lg/8 text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
             </div>
             <svg
               viewBox="0 0 1024 1024"

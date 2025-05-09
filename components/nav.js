@@ -430,7 +430,7 @@ export default function Navigation() {
                                               width={560}
                                               height={560}
                                               alt=""
-                                              src="/menu-hero-image.jpg"
+                                              src="/menu-hero-image-new.jpg"
                                               className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                             />
                                           </div>

@@ -22,12 +22,8 @@ export default async function Team() {
           <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-12 text-center shadow-2xl sm:px-12">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                Lorem ipsum dolor sit amet
+                Нашият екип
               </h1>
-              <p className="mt-6  text-lg/8 text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
             </div>
             <svg
               viewBox="0 0 1024 1024"
