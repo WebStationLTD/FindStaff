@@ -14,10 +14,7 @@ const navigation = {
     { name: "Блог", href: "/blog" },
     { name: "Контакти", href: "/contact" },
   ],
-  // legal: [
-  //   { name: "Условия за ползване", href: "#" },
-  //   { name: "Политика за поверителност", href: "/privacy-policy" },
-  // ],
+  legal: [{ name: "Политика за поверителност", href: "/privacy-policy" }],
   social: [
     {
       name: "Instagram",
@@ -337,7 +334,7 @@ export default function Footer() {
                   ))}
 
                   {/* Правна информация в същата колона */}
-                  {/* <li className="pt-6 mt-6 border-t border-gray-100">
+                  <li className="pt-6 mt-6 border-t border-gray-100">
                     <h3 className="text-sm/6 font-semibold text-gray-900">
                       Правна информация
                     </h3>
@@ -352,7 +349,7 @@ export default function Footer() {
                         {item.name}
                       </Link>
                     </li>
-                  ))} */}
+                  ))}
                 </ul>
               </div>
 
