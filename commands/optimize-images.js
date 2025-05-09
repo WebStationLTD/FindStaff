@@ -49,8 +49,8 @@ const DESKTOP_OUTPUT = path.join(
 );
 
 // Също генерираме LCP оптимизирани версии
-const MOBILE_LCP = path.join(PUBLIC_DIR, "hero-image-mobile.jpg");
-const DESKTOP_LCP = path.join(PUBLIC_DIR, "hero-image-desktop.jpg");
+const MOBILE_LCP = path.join(PUBLIC_DIR, "hero-image-mobile-new.jpg");
+const DESKTOP_LCP = path.join(PUBLIC_DIR, "hero-image-desktop-new.jpg");
 
 /**
  * Функция за оптимизиране на изображенията
@@ -144,8 +144,8 @@ async function optimizeImages() {
     console.log(`  - LCP Десктоп: ${DESKTOP_LCP} (${desktopLcpSize} KB)`);
 
     console.log("\n📝 ВАЖНО: LCP изображенията са записани като:");
-    console.log(`  - /hero-image-mobile.jpg (за мобилни устройства)`);
-    console.log(`  - /hero-image-desktop.jpg (за десктоп устройства)`);
+    console.log(`  - /hero-image-mobile-new.jpg (за мобилни устройства)`);
+    console.log(`  - /hero-image-desktop-new.jpg (за десктоп устройства)`);
     console.log(
       "  Те вече са конфигурирани в приложението и готови за използване."
     );

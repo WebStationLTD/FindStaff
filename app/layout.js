@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import Script from "next/script";
 import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
+import ClientBackToTop from "../components/ClientBackToTop";
 
 import "../styles/globals.css";
 import { Roboto } from "next/font/google";
@@ -82,7 +83,7 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="/hero-image-mobile.jpg"
+          href="/hero-image-mobile-new.jpg"
           type="image/jpg"
           media="(max-width: 640px)"
         />
@@ -90,7 +91,7 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="/hero-image-desktop.jpg"
+          href="/hero-image-desktop-new.jpg"
           type="image/jpg"
           media="(min-width: 641px)"
         />
@@ -103,6 +104,10 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <CookieConsentBanner />
         <Footer />
+
+        {/* Добавяме BackToTop бутона чрез клиентски компонент */}
+        <ClientBackToTop />
+
         <Script
           id="structured-data"
           type="application/ld+json"

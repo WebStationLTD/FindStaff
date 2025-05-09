@@ -9,9 +9,23 @@ import Link from "next/link";
 
 export async function generateMetadata() {
   return {
-    title: "Контакти - NextLevel Theme",
+    title: "Контакти | FindStaff - Свържете се с нас за персонал от чужбина",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Имате нужда от квалифицирани или неквалифицирани работници от трети държави? Свържете се с FindStaff за професионално съдействие при наемане на персонал от Украйна, Молдова, Азербайджан и др.",
+    keywords: [
+      "контакти FindStaff",
+      "наемане на персонал",
+      "работници от трети държави",
+      "легална процедура",
+      "консултация чужди работници",
+    ],
+    openGraph: {
+      title: "Контакти | FindStaff - Свържете се с нас за персонал от чужбина",
+      description:
+        "Имате нужда от квалифицирани или неквалифицирани работници от трети държави? Свържете се с FindStaff за професионално съдействие.",
+      locale: "bg_BG",
+      type: "website",
+    },
   };
 }
 

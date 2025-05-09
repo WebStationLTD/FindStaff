@@ -6,9 +6,25 @@ export async function generateMetadata() {
 
   if (!page) {
     return {
-      title: "За нас | NextLevel Services",
+      title:
+        "За нас | FindStaff - Експерти в набирането на персонал от чужбина",
       description:
-        "Научете повече за нашата компания и услугите, които предлагаме.",
+        "Специализирани сме в осигуряване на квалифицирани и неквалифицирани кадри от Украйна, Молдова, Азербайджан и др. Научете повече за нашия опит и успешни проекти в България.",
+      keywords: [
+        "FindStaff България",
+        "агенция за персонал",
+        "чуждестранни работници",
+        "работна ръка от чужбина",
+        "легално наемане",
+      ],
+      openGraph: {
+        title:
+          "За нас | FindStaff - Експерти в набирането на персонал от чужбина",
+        description:
+          "Специализирани сме в осигуряване на квалифицирани и неквалифицирани кадри от трети държави. Научете повече за нашия опит в България.",
+        locale: "bg_BG",
+        type: "website",
+      },
     };
   }
 
@@ -20,11 +36,15 @@ export async function generateMetadata() {
     title: meta.title,
     description: meta.description,
     openGraph: {
-      title: meta.og_title || "За нас | NextLevel Services",
+      title:
+        meta.og_title ||
+        "За нас | FindStaff - Експерти в набирането на персонал от чужбина",
       description:
         meta.og_description ||
-        "Научете повече за нашата компания и услугите, които предлагаме.",
+        "Специализирани сме в осигуряване на квалифицирани и неквалифицирани кадри от трети държави. Научете повече за нашия опит в България.",
       images: ogImage ? [{ url: ogImage }] : [],
+      locale: "bg_BG",
+      type: "website",
     },
     alternates: {
       canonical: meta.canonical,

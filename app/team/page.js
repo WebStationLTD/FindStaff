@@ -3,9 +3,23 @@ import Link from "next/link";
 import { getMembers } from "../../services/members";
 
 export const metadata = {
-  title: "Екип - NextLevel Theme",
+  title: "Нашият екип | FindStaff - Професионалисти в подбора на персонал",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Запознайте се с екипа на FindStaff - експерти с дългогодишен опит в подбора на персонал от чужбина. Ние сме специалисти по трудовата мобилност и легалното наемане на работници от трети държави.",
+  keywords: [
+    "екип FindStaff",
+    "специалисти подбор персонал",
+    "експерти по трудова мобилност",
+    "наемане чуждестранни служители",
+    "HR специалисти международен опит",
+  ],
+  openGraph: {
+    title: "Нашият екип | FindStaff - Професионалисти в подбора на персонал",
+    description:
+      "Запознайте се с екипа на FindStaff - експерти с дългогодишен опит в подбора на персонал от чужбина.",
+    locale: "bg_BG",
+    type: "website",
+  },
 };
 
 export default async function Team() {

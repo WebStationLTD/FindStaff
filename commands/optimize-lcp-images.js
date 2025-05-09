@@ -15,12 +15,12 @@ const sharp = require("sharp");
 const PUBLIC_DIR = path.join(__dirname, "../public");
 
 // LCP изображения, които ще бъдат допълнително оптимизирани
-const MOBILE_IMAGE = path.join(PUBLIC_DIR, "hero-image-mobile.jpg");
-const DESKTOP_IMAGE = path.join(PUBLIC_DIR, "hero-image-desktop.jpg");
+const MOBILE_IMAGE = path.join(PUBLIC_DIR, "hero-image-mobile-new.jpg");
+const DESKTOP_IMAGE = path.join(PUBLIC_DIR, "hero-image-desktop-new.jpg");
 
 // Временни файлове за процеса на оптимизация
-const MOBILE_TEMP = path.join(PUBLIC_DIR, "hero-image-mobile-temp.jpg");
-const DESKTOP_TEMP = path.join(PUBLIC_DIR, "hero-image-desktop-temp.jpg");
+const MOBILE_TEMP = path.join(PUBLIC_DIR, "hero-image-mobile-new-temp.jpg");
+const DESKTOP_TEMP = path.join(PUBLIC_DIR, "hero-image-desktop-new-temp.jpg");
 
 async function optimizeLCPImages() {
   console.log("Започва допълнителна оптимизация на LCP изображения...");

@@ -20,8 +20,8 @@ const SOURCE_IMAGE = process.argv[2]
   : path.join(PUBLIC_DIR, "source-image.jpg"); // Изходно изображение
 
 // Директни изходи за LCP изображенията
-const MOBILE_OUTPUT = path.join(PUBLIC_DIR, "hero-image-mobile.jpg");
-const DESKTOP_OUTPUT = path.join(PUBLIC_DIR, "hero-image-desktop.jpg");
+const MOBILE_OUTPUT = path.join(PUBLIC_DIR, "hero-image-mobile-new.jpg");
+const DESKTOP_OUTPUT = path.join(PUBLIC_DIR, "hero-image-desktop-new.jpg");
 
 // Размери
 const MOBILE_WIDTH = 640;

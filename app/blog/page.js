@@ -2,9 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Блог - NextLevel Theme",
+  title: "Блог | FindStaff - Наемане на персонал от чужбина",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Актуални статии и полезна информация за наемане на персонал от трети държави. Научете за законовите изисквания, процедурите за работни визи, синя карта на ЕС и още полезни съвети.",
+  keywords: [
+    "блог наемане персонал",
+    "трети държави работници",
+    "чуждестранни служители",
+    "процедура работна виза",
+    "синя карта ЕС",
+    "законови изисквания наемане",
+  ],
+  openGraph: {
+    title: "Блог | FindStaff - Наемане на персонал от чужбина",
+    description:
+      "Актуални статии и полезна информация за наемане на персонал от трети държави. Законови изисквания, процедури за работни визи и съвети.",
+    locale: "bg_BG",
+    type: "website",
+  },
 };
 
 export default async function Blog({ searchParams }) {
