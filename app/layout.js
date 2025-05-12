@@ -6,6 +6,7 @@ import Script from "next/script";
 import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
 import ClientBackToTop from "../components/ClientBackToTop";
+import NextTopLoader from "nextjs-toploader";
 
 import "../styles/globals.css";
 import { Roboto } from "next/font/google";
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={roboto.className}>
+        <NextTopLoader />
         <ImagePreloader />
         <Navigation />
         <main>{children}</main>
