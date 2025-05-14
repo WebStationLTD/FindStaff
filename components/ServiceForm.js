@@ -8,7 +8,7 @@ import RestaurantStaffHiringForm from "./RestaurantStaffHiringForm";
 import HotelStaffHiringForm from "./HotelStaffHiringForm";
 import ConstructionWorkersHiringForm from "./ConstructionWorkersHiringForm";
 
-export default function ServiceForm({ serviceId, serviceSlug }) {
+export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
   // Map service slugs to form types
   const getFormTypeBySlug = (slug) => {
     const formMapping = {
@@ -25,22 +25,27 @@ export default function ServiceForm({ serviceId, serviceSlug }) {
   };
 
   const formType = getFormTypeBySlug(serviceSlug);
+  
+  // Ensure serviceName is a string and strip HTML tags if present
+  const sanitizedServiceName = serviceName 
+    ? String(serviceName).replace(/<[^>]*>/g, '') 
+    : "Заявка";
 
   // Render the appropriate form based on the form type
   const renderForm = () => {
     switch (formType) {
       case "production-hiring":
-        return <ProductionHiringForm serviceId={serviceId} />;
+        return <ProductionHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
       case "service-staff-hiring":
-        return <ServiceStaffHiringForm serviceId={serviceId} />;
+        return <ServiceStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
       case "restaurant-staff-hiring":
-        return <RestaurantStaffHiringForm serviceId={serviceId} />;
+        return <RestaurantStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
       case "hotel-staff-hiring":
-        return <HotelStaffHiringForm serviceId={serviceId} />;
+        return <HotelStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
       case "construction-workers-hiring":
-        return <ConstructionWorkersHiringForm serviceId={serviceId} />;
+        return <ConstructionWorkersHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
       default:
-        return <ConstructionWorkersHiringForm />;
+        return <ConstructionWorkersHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
     }
   };
 

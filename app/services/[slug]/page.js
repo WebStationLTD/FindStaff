@@ -151,6 +151,7 @@ export default async function ServicePage({ params }) {
                 <ServiceForm 
                   serviceId={service[0].id} 
                   serviceSlug={slug} 
+                  serviceName={service[0].title.rendered.replace(/<[^>]*>/g, '')}
                 />
               </Suspense>
             </div>
