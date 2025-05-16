@@ -112,6 +112,10 @@ export default async function ContactPage() {
                 </>
               )}
             </dl>
+            <p className="mt-6 text-lg/8 text-gray-600">
+              Заявка за персонал можете да направите в раздел услуги, след като
+              изберете какъв тип работник желаете да наемете.
+            </p>
           </div>
         </div>
         <ContactForm />
