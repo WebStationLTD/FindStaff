@@ -71,7 +71,7 @@ export default async function MemberDetails({ params }) {
           </h2>
           <p className="text-gray-600 mb-4">{member.position || ""}</p>
           <div className="text-gray-700">
-            {member.phonenumber && (
+            {/* {member.phonenumber && (
               <p className="mb-2">
                 <strong>Телефон: </strong>
                 <Link href={`tel:${member.phonenumber}`}>
@@ -84,7 +84,7 @@ export default async function MemberDetails({ params }) {
                 <strong>Email: </strong>
                 <Link href={`mailto:${member.email}`}>{member.email}</Link>
               </p>
-            )}
+            )} */}
 
             {member.linkedin && member.linkedin.url && (
               <Link

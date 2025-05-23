@@ -18,7 +18,7 @@ const navigation = {
   social: [
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/findstaff.bg/",
       icon: FaInstagram,
       target: "_blank",
       rel: "noopener noreferrer",
