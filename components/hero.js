@@ -105,7 +105,7 @@ export default function Example() {
                   >
                     <img
                       alt=""
-                      src="hero-1.jpg"
+                      src="детегледачки-hero.jpg"
                       className="h-[176px] w-[264px] rounded-lg bg-gray-900/5 object-cover shadow-lg"
                     />
                   </div>
@@ -116,7 +116,7 @@ export default function Example() {
                   >
                     <img
                       alt=""
-                      src="hero-2.jpg"
+                      src="хотелски-персонал-hero.jpg"
                       className="h-[176px] w-[264px] rounded-lg bg-gray-900/5 object-cover shadow-lg"
                     />
                   </div>
@@ -127,7 +127,7 @@ export default function Example() {
                   >
                     <img
                       alt=""
-                      src="hero-3.jpg"
+                      src="ресторантьорски-персонал-hero.jpg"
                       className="h-[176px] w-[264px] rounded-lg bg-gray-900/5 object-cover shadow-lg"
                     />
                   </div>
@@ -149,7 +149,7 @@ export default function Example() {
                   >
                     <img
                       alt=""
-                      src="hero-5.jpg"
+                      src="строителни-работници-hero.jpg"
                       className="h-[176px] w-[264px] rounded-lg bg-gray-900/5 object-cover shadow-lg"
                     />
                   </div>
@@ -161,7 +161,7 @@ export default function Example() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="hero-1.jpg"
+                        src="детегледачки-hero.jpg"
                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
@@ -171,7 +171,7 @@ export default function Example() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="hero-2.jpg"
+                        src="хотелски-персонал-hero.jpg"
                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
@@ -179,7 +179,7 @@ export default function Example() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="hero-3.jpg"
+                        src="ресторантьорски-персонал-hero.jpg"
                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
@@ -197,7 +197,7 @@ export default function Example() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="hero-5.jpg"
+                        src="строителни-работници-hero.jpg"
                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />

@@ -68,17 +68,12 @@ export default async function Team() {
               За екипа
             </h2>
             <p className="mt-6 text-lg/8 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <p className="mt-6 text-lg/8 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <p className="mt-6 text-lg/8 text-gray-600">
-              Lorem ipsum dolor sit amet!
+              Ние от Find Stuff сме вашият надежден партньор в подбора и
+              наемането на висококвалифициран персонал от съседни и трети
+              държави. Специализирани сме в цялостното съдействие по всички
+              етапи на процеса — от първоначалната препоръка до подготовката на
+              всички необходими документи, за да могат вашите нови служители да
+              започнат работа при вас без проблеми.
             </p>
           </div>
           <ul role="list" className="divide-y divide-gray-200 xl:col-span-3">
