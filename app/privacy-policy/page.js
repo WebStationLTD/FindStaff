@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export async function generateMetadata() {
   return {
-    title: "Политика за поверителност - NextLevel Theme",
+    title: "Политика за поверителност - findstaff.bg",
     description:
       "Научете повече за нашата политика за поверителност и как обработваме вашите лични данни.",
   };
@@ -18,7 +18,7 @@ export default async function PrivacyPolicy() {
         Политика за поверителност
       </h1>
       <p className="mb-4 text-gray-700">
-        Настоящата Политика за поверителност описва как NextLevel Theme събира,
+        Настоящата Политика за поверителност описва как FindStaff събира,
         използва и защитава личните данни на потребителите на нашия уебсайт.
       </p>
 

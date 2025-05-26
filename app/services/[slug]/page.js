@@ -82,9 +82,9 @@ export default async function ServicePage({ params }) {
       url: meta.canonical || `https://example.bg/services/${slug}`,
       provider: {
         "@type": "Organization",
-        name: "NextLevel Services",
-        url: "https://example.bg",
-        logo: "https://example.bg/logo.png",
+        name: "FindStaff",
+        url: "https://findstaff.bg",
+        logo: "https://findstaff.bg/find-staff-logo.svg",
       },
       image: ogImage || "https://example.bg/placeholder.webp",
       offers: {
@@ -141,17 +141,20 @@ export default async function ServicePage({ params }) {
             >
               <ServiceContent content={service[0].content.rendered} />
             </Suspense>
-            
+
             <div className="mt-16">
               <Suspense
                 fallback={
                   <div className="animate-pulse h-96 bg-gray-100 rounded-md"></div>
                 }
               >
-                <ServiceForm 
-                  serviceId={service[0].id} 
-                  serviceSlug={slug} 
-                  serviceName={service[0].title.rendered.replace(/<[^>]*>/g, '')}
+                <ServiceForm
+                  serviceId={service[0].id}
+                  serviceSlug={slug}
+                  serviceName={service[0].title.rendered.replace(
+                    /<[^>]*>/g,
+                    ""
+                  )}
                 />
               </Suspense>
             </div>

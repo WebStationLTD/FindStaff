@@ -17,19 +17,19 @@ const ServicesList = dynamic(() => import("../../components/ServicesList"), {
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Услуги - NextLevel Theme",
+  title: "Услуги - FindStaff",
   description:
     "Разгледайте всички наши професионални услуги, които предлагаме за бизнеса. Открийте как можем да помогнем на вашия бизнес да расте и да се развива.",
-  keywords: ["услуги", "бизнес услуги", "професионални услуги", "NextLevel"],
+  keywords: ["услуги", "бизнес услуги", "професионални услуги", "FindStaff"],
   openGraph: {
-    title: "Професионални Услуги | NextLevel Services",
+    title: "Професионални Услуги | FindStaff",
     description: "Разгледайте всички наши професионални услуги",
     images: [
       {
         url: "/services-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "NextLevel Services",
+        alt: "FindStaff",
       },
     ],
   },
@@ -38,6 +38,7 @@ export const metadata = {
 export default async function Services() {
   try {
     const services = await getServices();
+    // console.log("Services data:", JSON.stringify(services, null, 2)); // Временно добавяме console.log
 
     if (!services || services.length === 0) {
       return (
@@ -63,8 +64,8 @@ export default async function Services() {
             "...",
           provider: {
             "@type": "Organization",
-            name: "NextLevel Services",
-            url: "https://example.bg",
+            name: "FindStaff",
+            url: "https://findstaff.bg",
           },
         },
       })),

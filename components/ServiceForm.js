@@ -25,27 +25,57 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
   };
 
   const formType = getFormTypeBySlug(serviceSlug);
-  
+
   // Ensure serviceName is a string and strip HTML tags if present
-  const sanitizedServiceName = serviceName 
-    ? String(serviceName).replace(/<[^>]*>/g, '') 
+  const sanitizedServiceName = serviceName
+    ? String(serviceName).replace(/<[^>]*>/g, "")
     : "Заявка";
 
   // Render the appropriate form based on the form type
   const renderForm = () => {
     switch (formType) {
       case "production-hiring":
-        return <ProductionHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <ProductionHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
       case "service-staff-hiring":
-        return <ServiceStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <ServiceStaffHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
       case "restaurant-staff-hiring":
-        return <RestaurantStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <RestaurantStaffHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
       case "hotel-staff-hiring":
-        return <HotelStaffHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <HotelStaffHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
       case "construction-workers-hiring":
-        return <ConstructionWorkersHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <ConstructionWorkersHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
       default:
-        return <ConstructionWorkersHiringForm serviceId={serviceId} serviceName={sanitizedServiceName} />;
+        return (
+          <ConstructionWorkersHiringForm
+            serviceId={serviceId}
+            serviceName={sanitizedServiceName}
+          />
+        );
     }
   };
 
@@ -54,11 +84,8 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
       <div className="px-6 py-8 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Кандидатствай сега
+            Изпратете заявка
           </h2>
-          <p className="mt-2 text-lg leading-8 text-gray-600">
-            Попълнете формата и ние ще се свържем с вас възможно най-скоро.
-          </p>
         </div>
         {renderForm()}
       </div>

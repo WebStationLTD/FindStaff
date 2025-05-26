@@ -28,23 +28,23 @@ export async function generateMetadata() {
   return {
     metadataBase: new URL(`${protocol}://${host}`),
     title: {
-      template: "%s | NextLevel Services",
-      default: "NextLevel Services | Професионални бизнес услуги",
+      template: "%s | FindStaff",
+      default: "FindStaff | Международни таланти на ваше разположение",
     },
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     openGraph: {
-      title: "NextLevel Services | Професионални бизнес услуги",
+      title: "FindStaff | Международни таланти на ваше разположение",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       images: "/lawyer.webp",
       type: "website",
       locale: "bg_BG",
-      siteName: "NextLevel Services",
+      siteName: "FindStaff",
     },
     twitter: {
       card: "summary_large_image",
-      title: "NextLevel Services",
+      title: "FindStaff",
       description: "Lorem ipsum dolor sit amet",
       images: ["/lawyer.webp"],
     },
@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={roboto.className}>
-        <NextTopLoader showSpinner={false}/>
+        <NextTopLoader showSpinner={false} />
         <ImagePreloader />
         <Navigation />
         <main>{children}</main>
