@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const URL_FORM =
-  "https://findstaff.admin-panels.com/wp-json/contact-form-7/v1/contact-forms/46/feedback";
+  "https://findstaff.admin-panels.com/wp-json/contact-form-7/v1/contact-forms/625/feedback";
 
-export default function ProductionHiringForm({ serviceId }) {
+export default function ProductionHiringForm({ serviceId, serviceName }) {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // Scroll to the first error element when validation fails
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      const errorFields = document.querySelectorAll('.error-field');
+      if (errorFields.length > 0) {
+        errorFields[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [errors]);
 
   const countryOptions = [
     "Филипини",
@@ -35,9 +45,37 @@ export default function ProductionHiringForm({ serviceId }) {
     "Общ персонал"
   ];
 
+  // Helper function to determine if a field has error
+  const hasError = (fieldName) => {
+    return errors[fieldName] !== undefined;
+  };
+
+  // Helper function to get the appropriate class for an input field
+  const getInputClassName = (fieldName) => {
+    const baseClass = "mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 sm:text-sm px-3 py-2 border transition-colors";
+    return hasError(fieldName) 
+      ? `${baseClass} border-red-500 bg-red-50 focus:border-red-500` 
+      : `${baseClass} border-gray-300 focus:border-blue-500`;
+  };
+
+  // Create an error message component
+  const ErrorMessage = ({ fieldName }) => {
+    if (!hasError(fieldName)) return null;
+    
+    return (
+      <p className="mt-1 text-sm text-red-600 font-medium flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        {errors[fieldName]}
+      </p>
+    );
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
+    setErrors({});
 
     const formData = new FormData();
 
@@ -106,9 +144,20 @@ export default function ProductionHiringForm({ serviceId }) {
     formData.append("your-phone", phone);
     formData.append("your-email", email);
     formData.append("your-address", address);
+    
+    // Add subject using serviceName if available
+    formData.append("your-subject", `Заявка за ${serviceName}`);
+    
+    // Use text fields instead of select fields
     formData.append("your-countries", selectedCountries.join(", "));
+    formData.append("your-countries-other", otherCountry);
+    
     formData.append("your-languages", languages);
+    
+    // Use text fields instead of select fields
     formData.append("your-positions", selectedPositions.join(", "));
+    formData.append("your-positions-other", otherPosition);
+    
     formData.append("your-start-time", startTime);
     formData.append("your-end-time", endTime);
     formData.append("your-work-days", workDays);
@@ -122,6 +171,7 @@ export default function ProductionHiringForm({ serviceId }) {
     formData.append("your-start-date", startDate);
     formData.append("your-additional-requirements", additionalRequirements);
     formData.append("your-service-id", serviceId || "");
+    formData.append("your-service-name", serviceName || "");
 
     const reqOptions = {
       method: "POST",
@@ -129,6 +179,8 @@ export default function ProductionHiringForm({ serviceId }) {
     };
 
     try {
+      console.log("Form submission data:", Object.fromEntries(formData));
+      
       const req = await fetch(URL_FORM, reqOptions);
       const response = await req.json();
 
@@ -155,6 +207,7 @@ export default function ProductionHiringForm({ serviceId }) {
         });
       }
     } catch (error) {
+      console.error("Form submission error:", error);
       Swal.fire({
         icon: "error",
         title: "Неуспешно изпращане!",
@@ -179,8 +232,12 @@ export default function ProductionHiringForm({ serviceId }) {
         }`}
       >
         <div className="mx-auto max-w-2xl">
+          {/* Hidden Service Fields */}
+          <input type="hidden" id="serviceId" name="serviceId" value={serviceId || ""} />
+          <input type="hidden" id="serviceName" name="serviceName" value={serviceName || ""} />
+          
           {/* Contact Information */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-name") || hasError("your-phone") || hasError("your-email") || hasError("your-address") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Контактна информация</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div className="sm:col-span-2">
@@ -190,9 +247,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="fullName"
                   name="fullName"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-name")}
                 />
-                {errors["your-name"] && <p className="mt-1 text-sm text-red-600">{errors["your-name"]}</p>}
+                <ErrorMessage fieldName="your-name" />
               </div>
               
               <div className="sm:col-span-2">
@@ -202,9 +259,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="phone"
                   name="phone"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-phone")}
                 />
-                {errors["your-phone"] && <p className="mt-1 text-sm text-red-600">{errors["your-phone"]}</p>}
+                <ErrorMessage fieldName="your-phone" />
               </div>
               
               <div className="sm:col-span-2">
@@ -214,9 +271,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="email"
                   name="email"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-email")}
                 />
-                {errors["your-email"] && <p className="mt-1 text-sm text-red-600">{errors["your-email"]}</p>}
+                <ErrorMessage fieldName="your-email" />
               </div>
               
               <div className="sm:col-span-2">
@@ -226,15 +283,15 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="address"
                   name="address"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-address")}
                 />
-                {errors["your-address"] && <p className="mt-1 text-sm text-red-600">{errors["your-address"]}</p>}
+                <ErrorMessage fieldName="your-address" />
               </div>
             </div>
           </div>
           
           {/* Preferred Countries */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-countries") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Предпочитания относно произход на кандидата</h3>
             <div className="grid grid-cols-2 gap-y-2 sm:grid-cols-3 mb-4">
               {countryOptions.map(country => (
@@ -261,28 +318,29 @@ export default function ProductionHiringForm({ serviceId }) {
                 type="text"
                 id="otherCountry"
                 name="otherCountry"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-countries-other")}
               />
             </div>
+            <ErrorMessage fieldName="your-countries" />
           </div>
           
           {/* Languages */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-languages") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Езици, които трябва да говори кандидатът</h3>
             <div>
               <input
                 type="text"
                 id="languages"
                 name="languages"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-languages")}
                 placeholder="Например: английски, руски, български"
               />
-              {errors["your-languages"] && <p className="mt-1 text-sm text-red-600">{errors["your-languages"]}</p>}
+              <ErrorMessage fieldName="your-languages" />
             </div>
           </div>
           
           {/* Job Positions */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-positions") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Основни задължения</h3>
             <div className="grid grid-cols-2 gap-y-2 mb-4">
               {positionOptions.map(position => (
@@ -309,13 +367,14 @@ export default function ProductionHiringForm({ serviceId }) {
                 type="text"
                 id="otherPosition"
                 name="otherPosition"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-positions-other")}
               />
             </div>
+            <ErrorMessage fieldName="your-positions" />
           </div>
           
           {/* Work Hours */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-start-time") || hasError("your-end-time") || hasError("your-work-days") || hasError("your-weekly-hours") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Работно време</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
@@ -324,8 +383,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   type="time"
                   id="startTime"
                   name="startTime"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-start-time")}
                 />
+                <ErrorMessage fieldName="your-start-time" />
               </div>
               
               <div>
@@ -334,8 +394,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   type="time"
                   id="endTime"
                   name="endTime"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-end-time")}
                 />
+                <ErrorMessage fieldName="your-end-time" />
               </div>
               
               <div>
@@ -346,8 +407,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   name="workDays"
                   min="1"
                   max="7"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-work-days")}
                 />
+                <ErrorMessage fieldName="your-work-days" />
               </div>
               
               <div>
@@ -357,14 +419,15 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="weeklyHours"
                   name="weeklyHours"
                   min="1"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-weekly-hours")}
                 />
+                <ErrorMessage fieldName="your-weekly-hours" />
               </div>
             </div>
           </div>
           
           {/* Days Off and Leave */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-days-off") || hasError("your-paid-leave") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Почивни дни и отпуски</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
@@ -375,8 +438,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   name="daysOff"
                   min="0"
                   max="7"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-days-off")}
                 />
+                <ErrorMessage fieldName="your-days-off" />
               </div>
               
               <div>
@@ -386,20 +450,21 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="paidLeave"
                   name="paidLeave"
                   min="0"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-paid-leave")}
                 />
+                <ErrorMessage fieldName="your-paid-leave" />
               </div>
             </div>
           </div>
           
           {/* Accommodation */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-accommodation") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Настаняване</h3>
             <div>
               <select
                 id="accommodation"
                 name="accommodation"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-accommodation")}
               >
                 <option value="">Изберете опция</option>
                 <option value="Осигурено от работодателя">Осигурено от работодателя</option>
@@ -407,18 +472,18 @@ export default function ProductionHiringForm({ serviceId }) {
                 <option value="Споделено настаняване">Споделено настаняване</option>
                 <option value="Друго">Друго</option>
               </select>
-              {errors["your-accommodation"] && <p className="mt-1 text-sm text-red-600">{errors["your-accommodation"]}</p>}
+              <ErrorMessage fieldName="your-accommodation" />
             </div>
           </div>
           
           {/* Food */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-food") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Храна</h3>
             <div>
               <select
                 id="food"
                 name="food"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-food")}
               >
                 <option value="">Изберете опция</option>
                 <option value="Осигурена храна на място">Осигурена храна на място</option>
@@ -426,12 +491,12 @@ export default function ProductionHiringForm({ serviceId }) {
                 <option value="Самостоятелно пазаруване">Самостоятелно пазаруване</option>
                 <option value="Друго">Друго</option>
               </select>
-              {errors["your-food"] && <p className="mt-1 text-sm text-red-600">{errors["your-food"]}</p>}
+              <ErrorMessage fieldName="your-food" />
             </div>
           </div>
           
           {/* Salary */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-salary") || hasError("your-bonuses") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Заплащане</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
@@ -441,9 +506,9 @@ export default function ProductionHiringForm({ serviceId }) {
                   id="monthlySalary"
                   name="monthlySalary"
                   min="0"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-salary")}
                 />
-                {errors["your-salary"] && <p className="mt-1 text-sm text-red-600">{errors["your-salary"]}</p>}
+                <ErrorMessage fieldName="your-salary" />
               </div>
               
               <div>
@@ -452,36 +517,38 @@ export default function ProductionHiringForm({ serviceId }) {
                   type="text"
                   id="bonuses"
                   name="bonuses"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                  className={getInputClassName("your-bonuses")}
                 />
+                <ErrorMessage fieldName="your-bonuses" />
               </div>
             </div>
           </div>
           
           {/* Start Date */}
-          <div className="border-b border-gray-200 pb-6 mb-6">
+          <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-start-date") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Начална дата за започване на работа</h3>
             <div>
               <input
                 type="date"
                 id="startDate"
                 name="startDate"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-start-date")}
               />
-              {errors["your-start-date"] && <p className="mt-1 text-sm text-red-600">{errors["your-start-date"]}</p>}
+              <ErrorMessage fieldName="your-start-date" />
             </div>
           </div>
           
           {/* Additional Requirements */}
-          <div className="mb-6">
+          <div className={`mb-6 ${hasError("your-additional-requirements") ? "error-field" : ""}`}>
             <h3 className="text-lg font-semibold mb-4">Допълнителни изисквания или предпочитания</h3>
             <div>
               <textarea
                 id="additionalRequirements"
                 name="additionalRequirements"
                 rows="4"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border"
+                className={getInputClassName("your-additional-requirements")}
               ></textarea>
+              <ErrorMessage fieldName="your-additional-requirements" />
             </div>
           </div>
           
