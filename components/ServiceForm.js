@@ -1,12 +1,12 @@
 "use client";
 
 // Form components
-import ContactForm from "./contactForm";
 import ProductionHiringForm from "./ProductionHiringForm";
 import ServiceStaffHiringForm from "./ServiceStaffHiringForm";
 import RestaurantStaffHiringForm from "./RestaurantStaffHiringForm";
 import HotelStaffHiringForm from "./HotelStaffHiringForm";
 import ConstructionWorkersHiringForm from "./ConstructionWorkersHiringForm";
+import DefaultHiringForm from "./DefaultHiringForm";
 
 export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
   // Map service slugs to form types
@@ -21,7 +21,7 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
       "stroitelni-rabotnitsi": "construction-workers-hiring",
       // Add more mappings as needed
     };
-    return formMapping[slug] || "construction-workers-hiring";
+    return formMapping[slug] || "default-hiring";
   };
 
   const formType = getFormTypeBySlug(serviceSlug);
@@ -71,7 +71,7 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
         );
       default:
         return (
-          <ConstructionWorkersHiringForm
+          <DefaultHiringForm
             serviceId={serviceId}
             serviceName={sanitizedServiceName}
           />
