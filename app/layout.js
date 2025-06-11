@@ -6,6 +6,7 @@ import Script from "next/script";
 import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
 import ClientBackToTop from "../components/ClientBackToTop";
+import CallButton from "../components/CallButton";
 import NextTopLoader from "nextjs-toploader";
 
 import "../styles/globals.css";
@@ -109,6 +110,9 @@ export default function RootLayout({ children }) {
 
         {/* Добавяме BackToTop бутона чрез клиентски компонент */}
         <ClientBackToTop />
+        
+        {/* Добавяме Call бутона */}
+        <CallButton />
 
         <Script
           id="structured-data"
