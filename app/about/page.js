@@ -32,16 +32,26 @@ export async function generateMetadata() {
   const ogImage =
     meta.og_image && meta.og_image.length > 0 ? meta.og_image[0].url : "";
 
+  const fallbackDescription =
+    meta?.description && meta.description.trim().length > 0
+      ? meta.description
+      : (page?.excerpt?.rendered || page?.content?.rendered || "")
+          .replace(/<[^>]+>/g, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 160);
+
   return {
     title: meta.title,
-    description: meta.description,
+    description: fallbackDescription,
     openGraph: {
       title:
         meta.og_title ||
         "За нас | FindStaff - Експерти в набирането на персонал от чужбина",
       description:
-        meta.og_description ||
-        "Специализирани сме в осигуряване на квалифицирани и неквалифицирани кадри от трети държави. Научете повече за нашия опит в България.",
+        meta.og_description && meta.og_description.trim().length > 0
+          ? meta.og_description
+          : fallbackDescription,
       images: ogImage ? [{ url: ogImage }] : [],
       locale: "bg_BG",
       type: "website",

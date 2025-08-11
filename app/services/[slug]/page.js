@@ -28,10 +28,18 @@ export async function generateMetadata({ params }) {
   const meta = service[0].yoast_head_json;
   const ogImage =
     meta.og_image && meta.og_image.length > 0 ? meta.og_image[0].url : "";
+  const fallbackDescription =
+    meta?.description && meta.description.trim().length > 0
+      ? meta.description
+      : (service[0]?.excerpt?.rendered || service[0]?.content?.rendered || "")
+          .replace(/<[^>]+>/g, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 160);
 
   return {
     title: meta.title,
-    description: meta.description,
+    description: fallbackDescription,
     keywords: meta.keywords || [
       "услуги",
       "професионални услуги",
@@ -39,7 +47,10 @@ export async function generateMetadata({ params }) {
     ],
     openGraph: {
       title: meta.og_title,
-      description: meta.og_description,
+      description:
+        meta.og_description && meta.og_description.trim().length > 0
+          ? meta.og_description
+          : fallbackDescription,
       images: ogImage
         ? [
             {

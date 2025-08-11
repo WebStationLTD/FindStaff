@@ -28,7 +28,7 @@ export const getPageBySlug = cache(async (slug) => {
  * @returns {Promise<Object|null>} - Page data
  */
 export const getPageById = cache(async (id) => {
-  return await fetchAPI(`pages/${id}`, {
+  return await fetchAPI(`pages/${id}?_fields=id,slug,yoast_head_json,content,excerpt,title`, {
     next: { revalidate: 3600 }, // Обновяване на всеки час
   });
 });

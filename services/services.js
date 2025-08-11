@@ -7,7 +7,7 @@ import { cache } from "react";
  */
 export const getServices = cache(async () => {
   return await fetchAPI(
-    "services?_fields=id,slug,title,content,date,yoast_head_json,featured_media&per_page=100&_embed=true",
+    "services?_fields=id,slug,title,content,excerpt,date,yoast_head_json,featured_media&per_page=100&_embed=true",
     {
       next: { revalidate: 60 },
     }
@@ -31,7 +31,7 @@ export const getServicesNav = cache(async () => {
  */
 export const getServiceBySlug = cache(async (slug) => {
   return await fetchAPI(
-    `services?slug=${slug}&_fields=id,slug,yoast_head_json,date,title,content`
+    `services?slug=${slug}&_fields=id,slug,yoast_head_json,date,title,content,excerpt`
   );
 });
 
