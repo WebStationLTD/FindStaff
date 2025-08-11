@@ -1,4 +1,5 @@
 import { getPageById } from "../../services/pages";
+import Image from "next/image";
 
 export async function generateMetadata() {
   const pageId = 18; // ID на страницата "За нас"
@@ -122,10 +123,13 @@ export default async function AboutPage() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
         <article className="mx-auto max-w-8xl w-full">
           {ogImage && (
-            <img
+            <Image
               src={ogImage}
-              alt={meta.og_title}
+              alt={meta.og_title || page.title?.rendered || "About image"}
+              width={1200}
+              height={630}
               className="w-full h-auto mb-8 rounded-xl shadow-lg"
+              priority={false}
             />
           )}
           <div
