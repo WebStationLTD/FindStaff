@@ -33,6 +33,9 @@ export const metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default async function Services() {

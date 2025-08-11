@@ -6,6 +6,9 @@ export async function generateMetadata() {
     title: "Политика за поверителност - findstaff.bg",
     description:
       "Научете повече за нашата политика за поверителност и как обработваме вашите лични данни.",
+    alternates: {
+      canonical: "/privacy-policy",
+    },
   };
 }
 

@@ -26,6 +26,9 @@ export async function generateMetadata() {
       locale: "bg_BG",
       type: "website",
     },
+    alternates: {
+      canonical: "/contact",
+    },
   };
 }
 

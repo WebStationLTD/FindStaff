@@ -13,6 +13,9 @@ export async function generateMetadata({ params }) {
   return {
     title: member.name || "Член на екипа",
     //description: member.description,
+    alternates: {
+      canonical: `/team/${slug}`,
+    },
   };
 }
 

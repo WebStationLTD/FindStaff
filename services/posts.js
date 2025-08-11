@@ -21,3 +21,13 @@ export const getLatestPosts = cache(async () => {
     "posts?per_page=3&_fields=id,slug,yoast_head_json,date,title,content"
   );
 });
+
+/**
+ * Get all posts (for sitemap)
+ * @returns {Promise<Array>} - List of posts (up to 100)
+ */
+export const getAllPosts = cache(async () => {
+  return await fetchAPI(
+    "posts?per_page=100&_fields=id,slug,date,title"
+  );
+});

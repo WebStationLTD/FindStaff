@@ -47,7 +47,7 @@ export async function generateMetadata() {
       type: "website",
     },
     alternates: {
-      canonical: meta.canonical,
+      canonical: "/about",
     },
   };
 }

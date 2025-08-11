@@ -20,6 +20,9 @@ export const metadata = {
     locale: "bg_BG",
     type: "website",
   },
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default async function Blog({ searchParams }) {

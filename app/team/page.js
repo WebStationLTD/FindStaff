@@ -20,6 +20,9 @@ export const metadata = {
     locale: "bg_BG",
     type: "website",
   },
+  alternates: {
+    canonical: "/team",
+  },
 };
 
 export default async function Team() {

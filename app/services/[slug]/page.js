@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
       type: "article",
     },
     alternates: {
-      canonical: meta.canonical,
+      canonical: `/services/${slug}`,
     },
   };
 }

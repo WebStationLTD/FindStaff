@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       images: ogImage ? [{ url: ogImage }] : [],
     },
     alternates: {
-      canonical: meta.canonical,
+      canonical: `/blog/${slug}`,
     },
   };
 }
