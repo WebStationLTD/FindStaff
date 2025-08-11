@@ -115,26 +115,36 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LegalService",
-              name: "Lorem ipsum dolor sit amet",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-              url: "https://example.bg",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+359XXXXXXXXX",
-                contactType: "customer service",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "FindStaff",
+                url: "https://www.findstaff.bg",
+                logo: "https://www.findstaff.bg/find-staff-logo.svg",
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+359 88 7458463",
+                  email: "office@findstaff.com",
+                  contactType: "customer service",
+                  areaServed: "BG",
+                  availableLanguage: ["bg"]
+                },
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "ул. Рачо Димчев 2",
+                  addressLocality: "София",
+                  postalCode: "1000",
+                  addressCountry: "BG"
+                }
               },
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Example Street 123",
-                addressLocality: "София",
-                postalCode: "1000",
-                addressCountry: "BG",
-              },
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "FindStaff",
+                url: "https://www.findstaff.bg"
+              }
+            ]),
           }}
         />
       </body>
