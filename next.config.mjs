@@ -29,6 +29,22 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production", // Премахваме console.log в production
   },
+  async headers() {
+    return [
+      {
+        source: "/_next/(.*)",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
+        source: "/static/(.*)",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

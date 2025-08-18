@@ -17,7 +17,7 @@ Sitemap: ${baseUrl}/sitemap-index.xml
 
 # Disallow admin and private areas
 Disallow: /api/
-Disallow: /_next/
+Disallow: /static/
 Disallow: /admin/
 Disallow: /wp-admin/
 Disallow: /wp-includes/
