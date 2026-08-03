@@ -6,6 +6,7 @@ import { getAlternatesForLocale } from "../../../../lib/i18n/config";
 
 function normalizePost(raw) {
   if (!raw) return null;
+  // Already normalized (IT / mapped WP) — content already EUR-converted upstream
   if (typeof raw.title === "string") return raw;
   const meta = raw.yoast_head_json || {};
   return {

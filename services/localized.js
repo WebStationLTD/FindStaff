@@ -15,6 +15,7 @@ import {
   getServiceSlugForLocale,
   getPostSlugForLocale,
 } from "../lib/i18n/content";
+import { convertBgnPricesInHtml } from "../lib/i18n/currency";
 import { syncMissingItalianPostsOnce } from "../lib/i18n/sync-it-posts.mjs";
 
 async function ensureItalianPostsSynced() {
@@ -41,8 +42,8 @@ function mapWpService(service, locale = "bg") {
     sourceSlug: service.slug,
     slug: getServiceSlugForLocale(service.slug, locale),
     title: service.title?.rendered || service.title || "",
-    excerpt: service.excerpt?.rendered || "",
-    content: service.content?.rendered || "",
+    excerpt: convertBgnPricesInHtml(service.excerpt?.rendered || "", locale),
+    content: convertBgnPricesInHtml(service.content?.rendered || "", locale),
     date: service.date,
     metaTitle: meta.title || service.title?.rendered || "",
     metaDescription:
@@ -66,8 +67,8 @@ function mapItService(it) {
     sourceSlug: it.sourceSlug,
     slug: it.slugIt,
     title: it.title,
-    excerpt: it.excerpt,
-    content: it.contentHtml,
+    excerpt: convertBgnPricesInHtml(it.excerpt || "", "it"),
+    content: convertBgnPricesInHtml(it.contentHtml || "", "it"),
     date: it.date,
     metaTitle: it.metaTitle,
     metaDescription: it.metaDescription,
@@ -93,8 +94,8 @@ function mapWpPost(post, locale = "bg") {
     sourceSlug,
     slug: getPostSlugForLocale(sourceSlug, locale),
     title: post.title?.rendered || post.title || "",
-    excerpt: post.excerpt?.rendered || "",
-    content: post.content?.rendered || "",
+    excerpt: convertBgnPricesInHtml(post.excerpt?.rendered || "", locale),
+    content: convertBgnPricesInHtml(post.content?.rendered || "", locale),
     date: post.date,
     metaTitle: meta.title || post.title?.rendered || "",
     metaDescription: meta.description || "",
@@ -113,8 +114,8 @@ function mapItPost(it) {
     sourceSlug: it.sourceSlug,
     slug: it.slugIt,
     title: it.title,
-    excerpt: it.excerpt,
-    content: it.contentHtml,
+    excerpt: convertBgnPricesInHtml(it.excerpt || "", "it"),
+    content: convertBgnPricesInHtml(it.contentHtml || "", "it"),
     date: it.date,
     metaTitle: it.metaTitle,
     metaDescription: it.metaDescription,
@@ -165,7 +166,9 @@ export async function getLocalizedServiceBySlug(slug, locale) {
     if (it) return [mapItService(it)];
   }
   const sourceSlug = resolveServiceSourceSlug(slug, locale);
-  return getServiceBySlug(sourceSlug);
+  const result = await getServiceBySlug(sourceSlug);
+  if (!Array.isArray(result)) return result || [];
+  return result.map((s) => mapWpService(s, locale)).filter(Boolean);
 }
 
 export async function getLocalizedPageById(id, locale, sourceSlug) {
@@ -176,8 +179,12 @@ export async function getLocalizedPageById(id, locale, sourceSlug) {
         id: it.id,
         slug: it.sourceSlug,
         title: { rendered: it.title },
-        content: { rendered: it.contentHtml },
-        excerpt: { rendered: it.excerpt },
+        content: {
+          rendered: convertBgnPricesInHtml(it.contentHtml || "", "it"),
+        },
+        excerpt: {
+          rendered: convertBgnPricesInHtml(it.excerpt || "", "it"),
+        },
         yoast_head_json: {
           title: it.metaTitle,
           description: it.metaDescription,
@@ -188,7 +195,19 @@ export async function getLocalizedPageById(id, locale, sourceSlug) {
       };
     }
   }
-  return getPageById(id);
+  const page = await getPageById(id);
+  if (!page) return page;
+  return {
+    ...page,
+    content: {
+      ...(page.content || {}),
+      rendered: convertBgnPricesInHtml(page.content?.rendered || "", locale),
+    },
+    excerpt: {
+      ...(page.excerpt || {}),
+      rendered: convertBgnPricesInHtml(page.excerpt?.rendered || "", locale),
+    },
+  };
 }
 
 export async function getLocalizedPostBySlug(slug, locale) {
@@ -203,7 +222,9 @@ export async function getLocalizedPostBySlug(slug, locale) {
     if (it) return [mapItPost(it)];
     return [];
   }
-  return getPostBySlug(slug);
+  const result = await getPostBySlug(slug);
+  if (!Array.isArray(result)) return result || [];
+  return result.map((p) => mapWpPost(p, locale)).filter(Boolean);
 }
 
 export async function getLocalizedLatestPosts(locale) {

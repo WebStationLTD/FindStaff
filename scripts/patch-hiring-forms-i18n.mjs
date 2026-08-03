@@ -172,11 +172,11 @@ const replacements = [
     '<h3 className="text-lg font-semibold mb-4">{t("salaryTitle")}</h3>',
   ],
   [
-    '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Месеция нетна заплата (лв.)</label>',
+    '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Месечна нетна заплата (€)</label>',
     '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">{t("monthlySalary")}</label>',
   ],
   [
-    '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Месечна нетна заплата (лв.)</label>',
+    '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Месечна нетна заплата (€)</label>',
     '<label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">{t("monthlySalary")}</label>',
   ],
   [
