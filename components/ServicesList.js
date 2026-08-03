@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "../i18n/navigation";
 import LazyImageObserver from "./LazyImageObserver";
 
 /**
@@ -10,6 +11,7 @@ import LazyImageObserver from "./LazyImageObserver";
  * Използва IntersectionObserver за lazy loading на изображения и съдържание
  */
 export default function ServicesList({ services }) {
+  const t = useTranslations("common");
   const [visibleServices, setVisibleServices] = useState([]);
   const serviceRefs = useRef({});
 
@@ -112,7 +114,7 @@ export default function ServicesList({ services }) {
                         ? service.content.rendered
                             .replace(/<[^>]+>/g, "")
                             .substring(0, 450) + "..."
-                        : "Описание не е налично"}
+                        : t("descriptionUnavailable")}
                     </p>
                   </div>
                 </div>

@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
 const URL_FORM =
   "https://findstaff.admin-panels.com/wp-json/contact-form-7/v1/contact-forms/6/feedback";
 
 export default function ContactForm() {
+  const t = useTranslations("contactForm");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -29,13 +31,11 @@ export default function ContactForm() {
     formData.append("your-tel", phoneNumber);
     formData.append("your-message", message);
 
-    const reqOptions = {
-      method: "POST",
-      body: formData,
-    };
-
     try {
-      const req = await fetch(URL_FORM, reqOptions);
+      const req = await fetch(URL_FORM, {
+        method: "POST",
+        body: formData,
+      });
       const response = await req.json();
 
       if (response.status === "validation_failed") {
@@ -47,8 +47,8 @@ export default function ContactForm() {
       } else if (response.status === "mail_sent") {
         Swal.fire({
           icon: "success",
-          title: "Успешно изпратено!",
-          text: "Очаквайте отговор скоро : )",
+          title: t("successTitle"),
+          text: t("successText"),
           timer: 4000,
         });
         setErrors({});
@@ -56,15 +56,15 @@ export default function ContactForm() {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Грешка при изпращане!",
-          text: "Моля, опитайте отново по-късно.",
+          title: t("errorTitle"),
+          text: t("errorText"),
         });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Неуспешно изпращане!",
-        text: "Проверете връзката с интернет и опитайте отново.",
+        title: t("failTitle"),
+        text: t("failText"),
       });
     }
 
@@ -91,7 +91,7 @@ export default function ContactForm() {
                 htmlFor="name"
                 className="block text-sm/6 font-semibold text-gray-900"
               >
-                Име*
+                {t("name")}
               </label>
               <div className="mt-2.5">
                 <input
@@ -113,7 +113,7 @@ export default function ContactForm() {
                 htmlFor="email"
                 className="block text-sm/6 font-semibold text-gray-900"
               >
-                Имейл*
+                {t("email")}
               </label>
               <div className="mt-2.5">
                 <input
@@ -135,7 +135,7 @@ export default function ContactForm() {
                 htmlFor="phone-number"
                 className="block text-sm/6 font-semibold text-gray-900"
               >
-                Телефон*
+                {t("phone")}
               </label>
               <div className="mt-2.5">
                 <input
@@ -157,7 +157,7 @@ export default function ContactForm() {
                 htmlFor="subject"
                 className="block text-sm/6 font-semibold text-gray-900"
               >
-                Тема*
+                {t("subject")}
               </label>
               <div className="mt-2.5">
                 <input
@@ -178,7 +178,7 @@ export default function ContactForm() {
                 htmlFor="message"
                 className="block text-sm/6 font-semibold text-gray-900"
               >
-                Съобщение
+                {t("message")}
               </label>
               <div className="mt-2.5">
                 <textarea
@@ -197,7 +197,7 @@ export default function ContactForm() {
               className="rounded-md bg-[#005e9e] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               disabled={loading}
             >
-              Изпрати запитване
+              {loading ? t("sending") : t("send")}
             </button>
           </div>
         </div>

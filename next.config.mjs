@@ -1,3 +1,13 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// Avoid next-intl/plugin here: it loads @swc/core native bindings which
+// Windows Application Control can block on this machine.
+const i18nRequestPath = path
+  .resolve(__dirname, "./i18n/request.js")
+  .replace(/\\/g, "/");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
@@ -29,19 +39,29 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production", // Премахваме console.log в production
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        "next-intl/config": i18nRequestPath,
+      },
+    },
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "next-intl/config": i18nRequestPath,
+    };
+    return config;
+  },
   async headers() {
     return [
       {
         source: "/_next/(.*)",
-        headers: [
-          { key: "X-Robots-Tag", value: "noindex, nofollow" },
-        ],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
         source: "/static/(.*)",
-        headers: [
-          { key: "X-Robots-Tag", value: "noindex, nofollow" },
-        ],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
   },

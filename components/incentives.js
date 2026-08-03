@@ -1,25 +1,15 @@
-const incentives = [
-  {
-    name: "Глобален обхват",
-    imageSrc: "/icons/cta-icon-1.svg",
-    description:
-      "Достъп до квалифицирани кадри от целия свят с доказан опит в разнообразни индустрии, готови да допринесат незабавно към вашия екип.",
-  },
-  {
-    name: "Правна експертиза",
-    imageSrc: "/icons/cta-icon-2.svg",
-    description:
-      "Пълно съдействие при всички правни и административни процедури за наемане на персонал от трети страни, със спазване на всички международни регулации.",
-  },
-  {
-    name: "Персонализиран подход",
-    imageSrc: "/icons/cta-icon-3.svg",
-    description:
-      "Индивидуално разработена стратегия за всеки клиент, отчитаща спецификите на вашия бизнес, корпоративна култура и нужди от специфични умения.",
-  },
-];
+"use client";
+
+import { useTranslations } from "next-intl";
 
 export default function Incentives() {
+  const t = useTranslations("incentives");
+  const incentives = [0, 1, 2].map((i) => ({
+    name: t(`items.${i}.name`),
+    imageSrc: `/icons/cta-icon-${i + 1}.svg`,
+    description: t(`items.${i}.description`),
+  }));
+
   return (
     <div className="bg-gray-900">
       <div className="mx-auto max-w-7xl py-24 sm:px-2 lg:px-4">
@@ -27,18 +17,9 @@ export default function Incentives() {
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
             <div>
               <h2 className="text-4xl font-bold tracking-tight text-white">
-                Международни таланти на ваше разположение
+                {t("title")}
               </h2>
-              <p className="mt-4 text-white">
-                Find Staff предлага цялостно решение за компании, търсещи
-                работници от международния пазар на труда. Специализирани сме в
-                идентифицирането и привличането на професионалисти от бившите
-                съветски републики, Филипините, Непал и други развиващи се
-                пазари, където има богат набор от таланти, търсещи нови
-                възможности. Нашият екип от експерти не само подбира подходящите
-                кандидати, но и осигурява плавен преход с пълна административна
-                и юридическа подкрепа в целия процес на наемане и интеграция.
-              </p>
+              <p className="mt-4 text-white">{t("description")}</p>
             </div>
             <img
               alt=""

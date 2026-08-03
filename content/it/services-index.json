@@ -1,0 +1,65 @@
+[
+  {
+    "id": 408,
+    "sourceSlug": "detegledachki",
+    "slug": "tata-e-badanti",
+    "title": "Tate e badanti",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/детегледачки.jpg"
+  },
+  {
+    "id": 552,
+    "sourceSlug": "drugi-rabotnitsi",
+    "slug": "altri-lavoratori",
+    "title": "Altri lavoratori",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/drugi-rabotnitsi.jpg"
+  },
+  {
+    "id": 426,
+    "sourceSlug": "gradinari",
+    "slug": "giardinieri",
+    "title": "Giardinieri",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/gradinari.jpg"
+  },
+  {
+    "id": 428,
+    "sourceSlug": "higienisti",
+    "slug": "addetti-alle-pulizie",
+    "title": "Addetti alle pulizie",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/higienisti-ot-treti-strani.jpg"
+  },
+  {
+    "id": 417,
+    "sourceSlug": "hotelski-personal",
+    "slug": "personale-alberghiero",
+    "title": "Personale alberghiero",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/хотелски-персонал.jpg"
+  },
+  {
+    "id": 550,
+    "sourceSlug": "rabotnitsi-v-sektor-proizvodstvo",
+    "slug": "operai-produzione",
+    "title": "Operai di produzione",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/rabotnitsi-v-proizvodstvo.jpg"
+  },
+  {
+    "id": 420,
+    "sourceSlug": "restorantyorski-personal",
+    "slug": "personale-di-ristorazione",
+    "title": "Personale di ristorazione",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/ресторантьорски-персонал.jpg"
+  },
+  {
+    "id": 424,
+    "sourceSlug": "sezonni-rabotnitsi",
+    "slug": "lavoratori-stagionali",
+    "title": "Lavoratori stagionali",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/sezonni-rabotnitsi.jpg"
+  },
+  {
+    "id": 422,
+    "sourceSlug": "stroitelni-rabotnitsi",
+    "slug": "operai-edili",
+    "title": "Operai edili",
+    "ogImage": "https://findstaff.admin-panels.com/wp-content/uploads/2025/05/строителни-работници.jpg"
+  }
+]

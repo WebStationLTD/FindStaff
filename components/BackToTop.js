@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 
 export default function BackToTop() {
+  const t = useTranslations("common");
   const [isVisible, setIsVisible] = useState(false);
 
   // Функция за проверка на позицията при скролване
@@ -38,7 +40,7 @@ export default function BackToTop() {
         <button
           onClick={scrollToTop}
           className="fixed bottom-6 right-24 z-50 p-3 bg-[#005e9e] text-white rounded-full shadow-lg hover:bg-[#004c7f] transition-all duration-300 transform hover:scale-110 focus:outline-none"
-          aria-label="Скролни нагоре"
+          aria-label={t("backToTop")}
         >
           <ArrowUpIcon className="h-6 w-6" />
         </button>

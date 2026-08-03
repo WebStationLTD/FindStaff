@@ -1,37 +1,40 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import useSubscribe from "../hooks/useSubscribe";
 import { FaInstagram } from "react-icons/fa";
-import Link from "next/link";
-import { getServicesNav } from "../services/services";
-
-const navigation = {
-  pages: [
-    { name: "Начало", href: "/" },
-    { name: "За нас", href: "/about" },
-    { name: "Екип", href: "/team" },
-    { name: "Блог", href: "/blog" },
-    { name: "Контакти", href: "/contact" },
-  ],
-  legal: [{ name: "Политика за поверителност", href: "/privacy-policy" }],
-  social: [
-    {
-      name: "Instagram",
-      href: "https://www.instagram.com/findstaff.bg/",
-      icon: FaInstagram,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-  ],
-};
+import { Link } from "../i18n/navigation";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
+  const locale = useLocale();
   const [year, setYear] = useState(new Date().getFullYear());
   const [email, setEmail] = useState("");
   const { subscribe, loading } = useSubscribe();
   const [services, setServices] = useState([]);
   const [servicesLoading, setServicesLoading] = useState(true);
+
+  const navigation = {
+    pages: [
+      { name: tNav("home"), href: "/" },
+      { name: tNav("about"), href: "/about" },
+      { name: tNav("team"), href: "/team" },
+      { name: tNav("blog"), href: "/blog" },
+      { name: tNav("contact"), href: "/contact" },
+    ],
+    legal: [{ name: t("privacy"), href: "/privacy-policy" }],
+    social: [
+      {
+        name: "Instagram",
+        href: "https://www.instagram.com/findstaff.bg/",
+        icon: FaInstagram,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+    ],
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,10 +56,11 @@ export default function Footer() {
     const fetchServices = async () => {
       try {
         setServicesLoading(true);
-        const servicesData = await getServicesNav();
+        const res = await fetch(`/api/services-nav?locale=${locale}`);
+        const servicesData = await res.json();
         if (servicesData && Array.isArray(servicesData)) {
           const formattedServices = servicesData.map((service) => ({
-            name: service.title.rendered,
+            name: service.title?.rendered || service.title,
             href: `/services/${service.slug}`,
           }));
           setServices(formattedServices);
@@ -69,7 +73,7 @@ export default function Footer() {
     };
 
     fetchServices();
-  }, []);
+  }, [locale]);
 
   // Function to chunk the services array into columns
   const getServiceColumns = (services, columns = 2) => {
@@ -318,7 +322,7 @@ export default function Footer() {
               {/* Страници колона */}
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Страници
+                  {t("pages")}
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.pages.map((page) => (
@@ -336,7 +340,7 @@ export default function Footer() {
                   {/* Правна информация в същата колона */}
                   <li className="pt-6 mt-6 border-t border-gray-100">
                     <h3 className="text-sm/6 font-semibold text-gray-900">
-                      Правна информация
+                      {t("legal")}
                     </h3>
                   </li>
                   {navigation.legal.map((item) => (
@@ -356,7 +360,7 @@ export default function Footer() {
               {/* Услуги колона */}
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Услуги
+                  {t("services")}
                 </h3>
                 {servicesLoading ? (
                   <div className="mt-6 flex items-center justify-center">
@@ -384,7 +388,7 @@ export default function Footer() {
                               className="text-sm/6 font-medium text-[#005e9e] hover:text-gray-900"
                               prefetch={true}
                             >
-                              Всички услуги →
+                              {t("allServices")}
                             </Link>
                           </div>
                         )}
@@ -399,11 +403,10 @@ export default function Footer() {
         <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 lg:flex lg:items-center lg:justify-between">
           <div>
             <h3 className="text-sm/6 font-semibold text-gray-900">
-              Абонирайте се за нашия бюлетин
+              {t("newsletterTitle")}
             </h3>
             <p className="mt-2 text-sm/6 text-gray-600">
-              Получавайте ценни съвети, анализи и актуални новини директно във
-              вашата поща.
+              {t("newsletterText")}
             </p>
           </div>
           {loading && (
@@ -425,7 +428,7 @@ export default function Footer() {
               name="email-address"
               type="email"
               required
-              placeholder="Въведете Вашия имейл"
+              placeholder={t("emailPlaceholder")}
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -436,7 +439,7 @@ export default function Footer() {
                 type="submit"
                 className="flex w-full items-center justify-center rounded-md bg-[#005e9e] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Абонирайте се
+                {t("subscribe")}
               </button>
             </div>
           </form>
@@ -457,7 +460,7 @@ export default function Footer() {
             ))}
           </div>
           <p className="mt-8 text-sm/6 text-gray-600 md:order-1 md:mt-0">
-            &copy; {year} Find Staff, Inc. All rights reserved. Powered by{" "}
+            &copy; {year} Find Staff, Inc. {t("rights")}{" "}
             <a
               href="https://webstation.bg"
               target="_blank"

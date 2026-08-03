@@ -1,0 +1,300 @@
+{
+  "meta": {
+    "siteName": "FindStaff",
+    "titleTemplate": "%s | FindStaff",
+    "defaultTitle": "FindStaff | Talenti internazionali a vostra disposizione",
+    "defaultDescription": "Procedura legale per l'assunzione di personale da Paesi terzi. Supporto completo in selezione, documenti e contratti di lavoro.",
+    "homeTitle": "FindStaff | Assunzione di personale da Paesi terzi",
+    "homeDescription": "Procedura legale per l'assunzione di personale da Paesi terzi. Supporto completo in selezione, documenti e contratti di lavoro per lavoratori stranieri qualificati.",
+    "aboutTitle": "Chi siamo | FindStaff - Esperti nella selezione di personale straniero",
+    "aboutDescription": "Siamo specializzati nel fornire personale qualificato e non qualificato da Paesi terzi. Scoprite la nostra esperienza e i progetti realizzati.",
+    "contactTitle": "Contatti | FindStaff - Contattateci per personale straniero",
+    "contactDescription": "Avete bisogno di lavoratori qualificati o non qualificati da Paesi terzi? Contattate FindStaff per un supporto professionale nell'assunzione.",
+    "servicesTitle": "Servizi | FindStaff - Selezione di personale dall'estero",
+    "servicesDescription": "Scoprite i nostri servizi di assunzione di personale da Paesi terzi – hotel, ristoranti, produzione, edilizia e altro.",
+    "blogTitle": "Blog | FindStaff - Consigli sull'assunzione di personale straniero",
+    "blogDescription": "Articoli e consigli utili su assunzione, documenti e gestione di lavoratori stranieri.",
+    "teamTitle": "Team | FindStaff - Professionisti nella selezione internazionale",
+    "teamDescription": "Conoscete il team di FindStaff – esperti nella selezione di personale dall'estero.",
+    "privacyTitle": "Informativa sulla privacy | FindStaff",
+    "privacyDescription": "Scoprite come FindStaff tratta e protegge i vostri dati personali."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Chi siamo",
+    "team": "Team",
+    "blog": "Blog",
+    "contact": "Contatti",
+    "services": "Servizi",
+    "search": "Cerca...",
+    "loading": "Caricamento...",
+    "noResults": "Nessun risultato trovato",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "address": "Sofia, via Racho Dimchev 2"
+  },
+  "footer": {
+    "pages": "Pagine",
+    "legal": "Informazioni legali",
+    "privacy": "Informativa sulla privacy",
+    "services": "Servizi",
+    "allServices": "Tutti i servizi →",
+    "newsletterTitle": "Iscrivetevi alla nostra newsletter",
+    "newsletterText": "Ricevete consigli, analisi e novità direttamente nella vostra casella di posta.",
+    "emailPlaceholder": "Inserite la vostra email",
+    "subscribe": "Iscriviti",
+    "rights": "Tutti i diritti riservati. Powered by"
+  },
+  "hero": {
+    "title": "Agenzia di selezione del personale",
+    "subtitle": "da Paesi terzi e altri Paesi",
+    "description": "„Find Staff\" è un partner affidabile nella selezione di dipendenti qualificati, che mette in contatto i datori di lavoro con i candidati più adatti. Con un approccio strategico, metodi innovativi e anni di esperienza nelle risorse umane, aiutiamo le aziende a costruire team forti e motivati che fanno crescere il business.",
+    "services": "Servizi",
+    "contact": "Contatti"
+  },
+  "incentives": {
+    "title": "Talenti internazionali a vostra disposizione",
+    "description": "Find Staff offre una soluzione completa alle aziende che cercano lavoratori sul mercato internazionale del lavoro. Siamo specializzati nell'individuazione e nell'attrazione di professionisti dalle ex repubbliche sovietiche, dalle Filippine, dal Nepal e da altri mercati emergenti, dove c'è un ricco bacino di talenti in cerca di nuove opportunità. Il nostro team di esperti non solo seleziona i candidati giusti, ma garantisce anche una transizione fluida con pieno supporto amministrativo e legale durante l'intero processo di assunzione e integrazione.",
+    "items": [
+      {
+        "name": "Portata globale",
+        "description": "Accesso a personale qualificato da tutto il mondo, con esperienza comprovata in diversi settori, pronto a contribuire subito al vostro team."
+      },
+      {
+        "name": "Competenza legale",
+        "description": "Supporto completo in tutte le procedure legali e amministrative per l'assunzione di personale da Paesi terzi, nel rispetto delle normative internazionali."
+      },
+      {
+        "name": "Approccio personalizzato",
+        "description": "Strategia sviluppata su misura per ogni cliente, tenendo conto delle specificità del vostro business, della cultura aziendale e delle competenze richieste."
+      }
+    ]
+  },
+  "teamSection": {
+    "title": "Un team di esperti",
+    "description": "Dietro il successo di Find Staff c'è un team di professionisti esperti con una vasta esperienza nella selezione internazionale del personale. I nostri consulenti parlano più lingue e possiedono una conoscenza approfondita dei mercati del lavoro in diverse regioni del mondo. Combiniamo competenza nelle risorse umane, conoscenze legali e comprensione delle peculiarità culturali per garantire la corrispondenza perfetta tra aziende e candidati. Poniamo l'accento sulla costruzione di relazioni a lungo termine con i nostri clienti, basate su fiducia, professionalità e sul superamento costante delle aspettative.",
+    "memberFallback": "Membro del team"
+  },
+  "cta": {
+    "title": "Siete pronti ad ampliare gli orizzonti del vostro team?",
+    "description": "Contattateci oggi per discutere come possiamo aiutare la vostra azienda ad attrarre specialisti altamente qualificati dal mercato internazionale. Le nostre soluzioni personalizzate di selezione del personale vi garantiranno l'accesso a talenti che eleveranno il vostro business al livello successivo.",
+    "allServices": "Tutti i servizi",
+    "contact": "Contatti"
+  },
+  "clients": {
+    "title": "Partnership affidabili",
+    "description": "La nostra agenzia collabora con prestigiose organizzazioni internazionali e leader aziendali consolidati che si affidano a noi per la selezione di personale altamente qualificato. Abbiamo costruito partnership strategiche in numerosi settori, tra cui produzione, hospitality, IT e sanità. Grazie a queste collaborazioni abbiamo l'opportunità unica di collegare i migliori talenti dei mercati emergenti con aziende leader che cercano professionisti pronti a contribuire alla loro crescita e innovazione."
+  },
+  "newsletter": {
+    "title": "Iscrivetevi alla nostra newsletter",
+    "description": "Ricevete consigli, analisi e novità direttamente nella vostra casella di posta.",
+    "emailPlaceholder": "Inserite la vostra email",
+    "subscribe": "Iscriviti",
+    "benefit1Title": "Articoli settimanali",
+    "benefit1Text": "Ogni settimana selezioniamo per voi i temi più attuali e le analisi degli esperti. Restate informati e sempre un passo avanti.",
+    "benefit2Title": "Niente spam",
+    "benefit2Text": "Promettiamo: solo informazioni utili, senza messaggi inutili. Il vostro tempo è prezioso, per questo vi inviamo solo l'essenziale."
+  },
+  "testimonial": {
+    "quote": "Le aziende con una visione del futuro sanno che lo sviluppo del talento è un processo continuo, non un evento una tantum. Investire nelle persone è la via più sicura verso un successo sostenibile."
+  },
+  "latestPosts": {
+    "title": "Ultimi articoli",
+    "description": "Notizie, consigli e analisi dal team di FindStaff",
+    "readMore": "Leggi di più",
+    "viewAll": "Vedi tutti gli articoli"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Articoli e materiali esperti sull'assunzione di personale straniero",
+    "readMore": "Leggi di più",
+    "backToBlog": "← Torna al blog",
+    "publishedOn": "Pubblicato il",
+    "notFound": "Articolo non trovato."
+  },
+  "services": {
+    "title": "Servizi",
+    "description": "Soluzioni professionali per l'assunzione di personale dall'estero",
+    "learnMore": "Scopri di più",
+    "request": "Richiesta",
+    "notFound": "Servizio non trovato.",
+    "allServices": "Tutti i servizi"
+  },
+  "about": {
+    "title": "Chi siamo",
+    "loadError": "Il contenuto della pagina non può essere caricato."
+  },
+  "contact": {
+    "title": "Contattateci",
+    "formTitle": "Invia una richiesta"
+  },
+  "teamPage": {
+    "title": "Il nostro team",
+    "description": "Conoscete i professionisti dietro FindStaff",
+    "backToTeam": "← Torna al team",
+    "notFound": "Membro del team non trovato."
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy"
+  },
+  "cookie": {
+    "message": "Utilizziamo i cookie per migliorare i nostri servizi.",
+    "learnMore": "Scopri di più",
+    "accept": "Accetto",
+    "decline": "Rifiuto"
+  },
+  "subscribe": {
+    "errorTitle": "Errore nell'iscrizione!",
+    "errorEmail": "Inserite un indirizzo email valido.",
+    "successTitle": "Iscrizione riuscita!",
+    "successText": "Vi siete iscritti con successo alla nostra newsletter. Aspettatevi novità e aggiornamenti nella vostra email!",
+    "retryTitle": "Errore nell'iscrizione!",
+    "retryText": "Riprovate più tardi.",
+    "failTitle": "Iscrizione non riuscita!",
+    "failText": "Controllate la connessione internet e riprovate."
+  },
+  "contactForm": {
+    "name": "Nome*",
+    "email": "Email*",
+    "phone": "Telefono*",
+    "subject": "Oggetto*",
+    "message": "Messaggio",
+    "send": "Invia richiesta",
+    "sending": "Invio in corso...",
+    "successTitle": "Inviato con successo!",
+    "successText": "Aspettatevi una risposta a breve : )",
+    "errorTitle": "Errore durante l'invio!",
+    "errorText": "Riprovate più tardi.",
+    "failTitle": "Invio non riuscito!",
+    "failText": "Controllate la connessione internet e riprovate."
+  },
+  "forms": {
+    "requestTitle": "Invia una richiesta",
+    "contactInfo": "Informazioni di contatto",
+    "fullName": "Nome e cognome*",
+    "phone": "Telefono di contatto*",
+    "email": "Indirizzo email*",
+    "address": "Indirizzo (quartiere e città)*",
+    "candidateOrigin": "Preferenze sull'origine del candidato",
+    "countries": "Da quali Paesi desiderate personale?",
+    "otherCountry": "Altro Paese",
+    "other": "Altro",
+    "otherPrefix": "Altro",
+    "languagesTitle": "Lingue che il candidato deve parlare",
+    "languages": "Lingue richieste",
+    "languagesPlaceholder": "Ad esempio: inglese, russo, bulgaro",
+    "dutiesTitle": "Mansioni principali",
+    "workHoursTitle": "Orario di lavoro",
+    "startTime": "Ora di inizio",
+    "endTime": "Ora di fine",
+    "workDays": "Giorni lavorativi a settimana",
+    "weeklyHours": "Ore lavorative totali a settimana",
+    "daysOffTitle": "Giorni di riposo e ferie",
+    "daysOff": "Numero di giorni di riposo a settimana",
+    "paidLeave": "Ferie annuali retribuite (in giorni)",
+    "accommodationTitle": "Alloggio",
+    "foodTitle": "Pasti",
+    "salaryTitle": "Retribuzione",
+    "monthlySalary": "Stipendio netto mensile (BGN)",
+    "bonuses": "Bonus/premi aggiuntivi",
+    "startDateTitle": "Data di inizio del lavoro",
+    "startDate": "Data di inizio",
+    "additionalTitle": "Requisiti o preferenze aggiuntive",
+    "notes": "Note aggiuntive",
+    "selectOption": "Selezionate un'opzione",
+    "accommodationEmployer": "Fornito dal datore di lavoro",
+    "accommodationSelf": "Alloggio autonomo",
+    "accommodationShared": "Alloggio condiviso",
+    "foodOnSite": "Pasti forniti sul posto",
+    "foodVouchers": "Buoni pasto",
+    "foodSelf": "Acquisto autonomo",
+    "workersCount": "Numero di lavoratori",
+    "duration": "Durata",
+    "submit": "Invia richiesta",
+    "submitting": "Invio in corso...",
+    "requestSubject": "Richiesta per {service}",
+    "required": "Questo campo è obbligatorio",
+    "successTitle": "Inviato con successo!",
+    "successText": "Aspettatevi una risposta a breve : )",
+    "errorTitle": "Errore durante l'invio!",
+    "errorText": "Riprovate più tardi.",
+    "countryList": [
+      "Filippine",
+      "Indonesia",
+      "Nepal",
+      "India",
+      "Bangladesh",
+      "Sri Lanka",
+      "Kirghizistan",
+      "Uzbekistan",
+      "Turkmenistan",
+      "Egitto",
+      "Ucraina",
+      "Pakistan",
+      "Kazakistan",
+      "Vietnam"
+    ],
+    "positionsHotel": [
+      "Cameriere/cameriere di piano",
+      "Servizio in sala",
+      "Personale SPA / massaggiatori",
+      "Animazione per bambini",
+      "Receptionist",
+      "Servizio in ristorante",
+      "Baristi",
+      "Cuochi",
+      "Aiuto cucina"
+    ],
+    "positionsRestaurant": [
+      "Cuochi - cucina calda",
+      "Cuochi - cucina fredda",
+      "Pasticcieri",
+      "Panettieri / Pizzaioli",
+      "Maestro sushi",
+      "Camerieri",
+      "Addetti alle pulizie"
+    ],
+    "positionsConstruction": [
+      "Lavori di riparazione e finitura",
+      "Posa di pavimentazioni stradali",
+      "Lavori di muratura e intonaco",
+      "Stuccatura e verniciatura",
+      "Armatura e lavori in calcestruzzo",
+      "Montaggio di serramenti e porte",
+      "Posa di piastrelle",
+      "Lavori in cartongesso"
+    ],
+    "positionsProduction": [
+      "Personale per linee di produzione",
+      "Aiuto officina",
+      "Panettieri",
+      "Pizzaioli",
+      "Personale generico"
+    ],
+    "positionsService": [
+      "Giardinieri",
+      "Consulenti-venditori",
+      "Decoratori",
+      "Parrucchieri",
+      "Istruttori (sport, fitness, danza, ecc.)",
+      "Manicure/pedicure",
+      "Giardinaggio e manutenzione del verde",
+      "Tecnici di manutenzione edifici",
+      "Corrieri e fattorini",
+      "Autisti (categorie B, C, ecc.)"
+    ]
+  },
+  "contactPage": {
+    "hint": "Potete richiedere personale nella sezione Servizi, dopo aver scelto il tipo di lavoratore che desiderate assumere.",
+    "mapTitle": "Trovateci sulla mappa"
+  },
+  "common": {
+    "backToTop": "Torna su",
+    "callUs": "Chiamaci",
+    "loading": "Caricamento...",
+    "language": "Lingua",
+    "bulgarian": "Български",
+    "italian": "Italiano",
+    "descriptionUnavailable": "Descrizione non disponibile"
+  }
+}

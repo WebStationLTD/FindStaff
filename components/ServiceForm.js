@@ -1,16 +1,19 @@
 "use client";
 
-// Form components
+import { useTranslations } from "next-intl";
 import ProductionHiringForm from "./ProductionHiringForm";
 import ServiceStaffHiringForm from "./ServiceStaffHiringForm";
 import RestaurantStaffHiringForm from "./RestaurantStaffHiringForm";
 import HotelStaffHiringForm from "./HotelStaffHiringForm";
 import ConstructionWorkersHiringForm from "./ConstructionWorkersHiringForm";
 import DefaultHiringForm from "./DefaultHiringForm";
+import { serviceSlugMapReverse } from "../lib/i18n/config";
 
 export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
-  // Map service slugs to form types
+  const t = useTranslations("forms");
+
   const getFormTypeBySlug = (slug) => {
+    const sourceSlug = serviceSlugMapReverse[slug] || slug;
     const formMapping = {
       recruitment: "job-application",
       consultations: "consultation",
@@ -19,9 +22,14 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
       "restorantyorski-personal": "restaurant-staff-hiring",
       "hotelski-personal": "hotel-staff-hiring",
       "stroitelni-rabotnitsi": "construction-workers-hiring",
-      // Add more mappings as needed
+      // Italian slugs also resolve via reverse map above
+      "operai-produzione": "production-hiring",
+      "altri-lavoratori": "service-staff-hiring",
+      "personale-di-ristorazione": "restaurant-staff-hiring",
+      "personale-alberghiero": "hotel-staff-hiring",
+      "operai-edili": "construction-workers-hiring",
     };
-    return formMapping[slug] || "default-hiring";
+    return formMapping[sourceSlug] || formMapping[slug] || "default-hiring";
   };
 
   const formType = getFormTypeBySlug(serviceSlug);
@@ -29,7 +37,7 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
   // Ensure serviceName is a string and strip HTML tags if present
   const sanitizedServiceName = serviceName
     ? String(serviceName).replace(/<[^>]*>/g, "")
-    : "Заявка";
+    : t("requestTitle");
 
   // Render the appropriate form based on the form type
   const renderForm = () => {
@@ -84,7 +92,7 @@ export default function ServiceForm({ serviceId, serviceSlug, serviceName }) {
       <div className="px-6 py-8 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Изпратете заявка
+            {t("requestTitle")}
           </h2>
         </div>
         {renderForm()}

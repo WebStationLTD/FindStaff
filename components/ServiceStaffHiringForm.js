@@ -1,12 +1,15 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { useTranslations } from "next-intl";
 
 const URL_FORM =
   "https://findstaff.admin-panels.com/wp-json/contact-form-7/v1/contact-forms/627/feedback";
 
 export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
+  const t = useTranslations("forms");
+  const tForm = useTranslations("contactForm");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -20,35 +23,9 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
     }
   }, [errors]);
 
-  const countryOptions = [
-    "Филипини",
-    "Индонезия",
-    "Непал",
-    "Индия",
-    "Бангладеш",
-    "Шри Ланка",
-    "Киргизстан",
-    "Узбекистан",
-    "Туркменистан",
-    "Египет",
-    "Украйна",
-    "Пакистан",
-    "Казахстан",
-    "Виетнам"
-  ];
+  const countryOptions = t.raw("countryList");
 
-  const positionOptions = [
-    "Градинари",
-    "Консултант-продавачи",
-    "Декоратори",
-    "Фризьори",
-    "Инструктори (спортни, фитнес, танци и др.)",
-    "Маникюристи/педикюристи",
-    "Озеленители и поддръжка на зелени площи",
-    "Техници за поддръжка на сгради",
-    "Куриера и доставчици",
-    "Шофьори (категории B, C и др.)"
-  ];
+  const positionOptions = t.raw("positionsService");
 
   // Helper function to determine if a field has error
   const hasError = (fieldName) => {
@@ -99,7 +76,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
     });
     const otherCountry = e.target.otherCountry.value;
     if (otherCountry) {
-      selectedCountries.push(`Друго: ${otherCountry}`);
+      selectedCountries.push(`${t("otherPrefix")}: ${otherCountry}`);
     }
 
     // Languages
@@ -114,7 +91,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
     });
     const otherPosition = e.target.otherPosition.value;
     if (otherPosition) {
-      selectedPositions.push(`Друго: ${otherPosition}`);
+      selectedPositions.push(`${t("otherPrefix")}: ${otherPosition}`);
     }
 
     // Work hours
@@ -151,7 +128,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
     formData.append("your-address", address);
     
     // Add subject using serviceName if available
-    formData.append("your-subject", `Заявка за ${serviceName}`);
+    formData.append("your-subject", t("requestSubject", { service: serviceName }));
     
     // Use text fields instead of select fields
     formData.append("your-countries", selectedCountries.join(", "));
@@ -198,8 +175,8 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
       } else if (response.status === "mail_sent") {
         Swal.fire({
           icon: "success",
-          title: "Успешно изпратено!",
-          text: "Очаквайте отговор скоро : )",
+          title: t("successTitle"),
+          text: t("successText"),
           timer: 4000,
         });
         setErrors({});
@@ -207,16 +184,16 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Грешка при изпращане!",
-          text: "Моля, опитайте отново по-късно.",
+          title: t("errorTitle"),
+          text: t("errorText"),
         });
       }
     } catch (error) {
       console.error("Form submission error:", error);
       Swal.fire({
         icon: "error",
-        title: "Неуспешно изпращане!",
-        text: "Проверете връзката с интернет и опитайте отново.",
+        title: tForm("failTitle"),
+        text: tForm("failText"),
       });
     }
 
@@ -243,10 +220,10 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Contact Information */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-name") || hasError("your-phone") || hasError("your-email") || hasError("your-address") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Контактна информация</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("contactInfo")}</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div className="sm:col-span-2">
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Две имена*</label>
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">{t("fullName")}</label>
                 <input
                   type="text"
                   id="fullName"
@@ -258,7 +235,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div className="sm:col-span-2">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Телефон за връзка*</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">{t("phone")}</label>
                 <input
                   type="tel"
                   id="phone"
@@ -270,7 +247,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div className="sm:col-span-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Имейл адрес*</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t("email")}</label>
                 <input
                   type="email"
                   id="email"
@@ -282,7 +259,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div className="sm:col-span-2">
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Адрес (квартал и град)*</label>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-700">{t("address")}</label>
                 <input
                   type="text"
                   id="address"
@@ -297,7 +274,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Preferred Countries */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-countries") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Предпочитания относно произход на кандидата</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("candidateOrigin")}</h3>
             <div className="grid grid-cols-2 gap-y-2 sm:grid-cols-3 mb-4">
               {countryOptions.map(country => (
                 <div key={country} className="flex items-start">
@@ -318,7 +295,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               ))}
             </div>
             <div>
-              <label htmlFor="otherCountry" className="block text-sm font-medium text-gray-700">Друго</label>
+              <label htmlFor="otherCountry" className="block text-sm font-medium text-gray-700">{t("other")}</label>
               <input
                 type="text"
                 id="otherCountry"
@@ -331,14 +308,14 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Languages */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-languages") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Езици, които трябва да говори кандидатът</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("languagesTitle")}</h3>
             <div>
               <input
                 type="text"
                 id="languages"
                 name="languages"
                 className={getInputClassName("your-languages")}
-                placeholder="Например: английски, руски, български"
+                placeholder={t("languagesPlaceholder")}
               />
               <ErrorMessage fieldName="your-languages" />
             </div>
@@ -346,7 +323,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Job Positions */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-positions") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Основни задължения</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("dutiesTitle")}</h3>
             <div className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 mb-4">
               {positionOptions.map(position => (
                 <div key={position} className="flex items-start">
@@ -367,7 +344,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               ))}
             </div>
             <div>
-              <label htmlFor="otherPosition" className="block text-sm font-medium text-gray-700">Друго</label>
+              <label htmlFor="otherPosition" className="block text-sm font-medium text-gray-700">{t("other")}</label>
               <input
                 type="text"
                 id="otherPosition"
@@ -380,10 +357,10 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Work Hours */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-start-time") || hasError("your-end-time") || hasError("your-work-days") || hasError("your-weekly-hours") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Работно време</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("workHoursTitle")}</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
-                <label htmlFor="startTime" className="block text-sm font-medium text-gray-700">Начален час</label>
+                <label htmlFor="startTime" className="block text-sm font-medium text-gray-700">{t("startTime")}</label>
                 <input
                   type="time"
                   id="startTime"
@@ -394,7 +371,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div>
-                <label htmlFor="endTime" className="block text-sm font-medium text-gray-700">Краен час</label>
+                <label htmlFor="endTime" className="block text-sm font-medium text-gray-700">{t("endTime")}</label>
                 <input
                   type="time"
                   id="endTime"
@@ -405,7 +382,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div>
-                <label htmlFor="workDays" className="block text-sm font-medium text-gray-700">Работни дни в седмицата</label>
+                <label htmlFor="workDays" className="block text-sm font-medium text-gray-700">{t("workDays")}</label>
                 <input
                   type="number"
                   id="workDays"
@@ -418,7 +395,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div>
-                <label htmlFor="weeklyHours" className="block text-sm font-medium text-gray-700">Общ брой работни часове на седмица</label>
+                <label htmlFor="weeklyHours" className="block text-sm font-medium text-gray-700">{t("weeklyHours")}</label>
                 <input
                   type="number"
                   id="weeklyHours"
@@ -433,10 +410,10 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Days Off and Leave */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-days-off") || hasError("your-paid-leave") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Почивни дни и отпуски</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("daysOffTitle")}</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
-                <label htmlFor="daysOff" className="block text-sm font-medium text-gray-700">Брой почивни дни седмично</label>
+                <label htmlFor="daysOff" className="block text-sm font-medium text-gray-700">{t("daysOff")}</label>
                 <input
                   type="number"
                   id="daysOff"
@@ -449,7 +426,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div>
-                <label htmlFor="paidLeave" className="block text-sm font-medium text-gray-700">Платен годишен отпуск (в дни)</label>
+                <label htmlFor="paidLeave" className="block text-sm font-medium text-gray-700">{t("paidLeave")}</label>
                 <input
                   type="number"
                   id="paidLeave"
@@ -464,18 +441,18 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Accommodation */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-accommodation") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Настаняване</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("accommodationTitle")}</h3>
             <div>
               <select
                 id="accommodation"
                 name="accommodation"
                 className={getInputClassName("your-accommodation")}
               >
-                <option value="">Изберете опция</option>
-                <option value="Осигурено от работодателя">Осигурено от работодателя</option>
-                <option value="Самостоятелно настаняване">Самостоятелно настаняване</option>
-                <option value="Споделено настаняване">Споделено настаняване</option>
-                <option value="Друго">Друго</option>
+                <option value="">{t("selectOption")}</option>
+                <option value={t("accommodationEmployer")}>{t("accommodationEmployer")}</option>
+                <option value={t("accommodationSelf")}>{t("accommodationSelf")}</option>
+                <option value={t("accommodationShared")}>{t("accommodationShared")}</option>
+                <option value={t("other")}>{t("other")}</option>
               </select>
               <ErrorMessage fieldName="your-accommodation" />
             </div>
@@ -483,18 +460,18 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Food */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-food") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Храна</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("foodTitle")}</h3>
             <div>
               <select
                 id="food"
                 name="food"
                 className={getInputClassName("your-food")}
               >
-                <option value="">Изберете опция</option>
-                <option value="Осигурена храна на място">Осигурена храна на място</option>
-                <option value="Купони за храна">Купони за храна</option>
-                <option value="Самостоятелно пазаруване">Самостоятелно пазаруване</option>
-                <option value="Друго">Друго</option>
+                <option value="">{t("selectOption")}</option>
+                <option value={t("foodOnSite")}>{t("foodOnSite")}</option>
+                <option value={t("foodVouchers")}>{t("foodVouchers")}</option>
+                <option value={t("foodSelf")}>{t("foodSelf")}</option>
+                <option value={t("other")}>{t("other")}</option>
               </select>
               <ErrorMessage fieldName="your-food" />
             </div>
@@ -502,10 +479,10 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Salary */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-salary") || hasError("your-bonuses") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Заплащане</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("salaryTitle")}</h3>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <div>
-                <label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Месечна нетна заплата (лв.)</label>
+                <label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">{t("monthlySalary")}</label>
                 <input
                   type="number"
                   id="monthlySalary"
@@ -517,7 +494,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               </div>
               
               <div>
-                <label htmlFor="bonuses" className="block text-sm font-medium text-gray-700">Допълнителни бонуси/премии</label>
+                <label htmlFor="bonuses" className="block text-sm font-medium text-gray-700">{t("bonuses")}</label>
                 <input
                   type="text"
                   id="bonuses"
@@ -531,7 +508,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Start Date */}
           <div className={`border-b border-gray-200 pb-6 mb-6 ${hasError("your-start-date") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Начална дата за започване на работа</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("startDateTitle")}</h3>
             <div>
               <input
                 type="date"
@@ -545,7 +522,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
           
           {/* Additional Requirements */}
           <div className={`mb-6 ${hasError("your-additional-requirements") ? "error-field" : ""}`}>
-            <h3 className="text-lg font-semibold mb-4">Допълнителни изисквания или предпочитания</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("additionalTitle")}</h3>
             <div>
               <textarea
                 id="additionalRequirements"
@@ -563,7 +540,7 @@ export default function ServiceStaffHiringForm({ serviceId, serviceName }) {
               className="w-full rounded-md bg-[#005e9e] px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               disabled={loading}
             >
-              Изпрати заявка
+              {loading ? t("submitting") : t("submit")}
             </button>
           </div>
         </div>

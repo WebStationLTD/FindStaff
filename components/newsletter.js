@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { CalendarDaysIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
 import useSubscribe from "../hooks/useSubscribe";
 
 export default function Newsletter() {
+  const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
   const { subscribe, loading } = useSubscribe();
 
@@ -19,12 +21,9 @@ export default function Newsletter() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-4xl font-semibold tracking-tight text-white">
-              Абонирайте се за нашия бюлетин
+              {t("title")}
             </h2>
-            <p className="mt-4 text-lg text-gray-300">
-              Получавайте ценни съвети, анализи и актуални новини директно във
-              вашата поща.
-            </p>
+            <p className="mt-4 text-lg text-gray-300">{t("description")}</p>
             {loading && (
               <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 z-10 pointer-events-none">
                 <div className="w-12 h-12 border-4 border-gray-400 border-t-[#005e9e] rounded-full animate-spin"></div>
@@ -44,7 +43,7 @@ export default function Newsletter() {
                 name="email"
                 type="email"
                 required
-                placeholder="Въведете Вашия имейл"
+                placeholder={t("emailPlaceholder")}
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -54,7 +53,7 @@ export default function Newsletter() {
                 type="submit"
                 className="flex-none rounded-md bg-[#005e9e] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3.5 py-2.5 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Абонирайте се
+                {t("subscribe")}
               </button>
             </form>
           </div>
@@ -67,11 +66,10 @@ export default function Newsletter() {
                     className="size-6 text-white"
                   />
                 </div>
-                <span className="mt-4">Седмични статии</span>
+                <span className="mt-4">{t("benefit1Title")}</span>
               </dt>
               <dd className="mt-2 text-base/7 text-gray-400">
-                Всяка седмица подбираме за вас най-актуалните теми и експертни
-                анализи. Бъдете информирани и винаги една стъпка напред.
+                {t("benefit1Text")}
               </dd>
             </div>
             <div className="flex flex-col items-start">
@@ -82,11 +80,10 @@ export default function Newsletter() {
                     className="size-6 text-white"
                   />
                 </div>
-                <span className="mt-4">Без спам</span>
+                <span className="mt-4">{t("benefit2Title")}</span>
               </dt>
               <dd className="mt-2 text-base/7 text-gray-400">
-                Обещаваме: само полезна информация, без излишни съобщения.
-                Вашето време е ценно, затова ви изпращаме само най-важното.
+                {t("benefit2Text")}
               </dd>
             </div>
           </dl>

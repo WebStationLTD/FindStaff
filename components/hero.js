@@ -1,19 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "../i18n/navigation";
 
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
-];
-
-export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function HeroSection() {
+  const t = useTranslations("hero");
 
   return (
     <div className="bg-white overflow-hidden">
@@ -65,31 +56,26 @@ export default function Example() {
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 flex flex-col-reverse lg:flex-row lg:max-w-none lg:items-center">
                 <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl mt-8 lg:mt-0">
                   <h1 className="text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">
-                    Агенция за подбор на персонал
+                    {t("title")}
                   </h1>
                   <h2 className="mt-10 text-4xl font-bold tracking-tight text-black">
-                    от 3-ти страни и други държави
+                    {t("subtitle")}
                   </h2>
                   <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                    „Find Staff" е надежден партньор в подбора на квалифицирани
-                    служители, който свързва работодатели с най-подходящите
-                    кандидати. Със стратегически подход, иновативни методи и
-                    дългогодишен опит в човешките ресурси, ние помагаме на
-                    компаниите да изграждат силни, мотивирани екипи, които
-                    движат бизнеса напред.
+                    {t("description")}
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
                     <Link
                       href="/services"
                       className="rounded-md bg-[#005e9e] hover:bg-gray-300 cursor-pointer hover:text-[#000000] px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Услуги
+                      {t("services")}
                     </Link>
                     <Link
                       href="/contact"
                       className="text-sm/6 font-semibold text-gray-900"
                     >
-                      Контакти <span aria-hidden="true">→</span>
+                      {t("contact")} <span aria-hidden="true">→</span>
                     </Link>
                   </div>
                 </div>

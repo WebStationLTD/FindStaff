@@ -1,4 +1,10 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function Testimonial() {
+  const t = useTranslations("testimonial");
+
   return (
     <section className="relative isolate overflow-hidden bg-white px-6 py-24 lg:px-8">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),white)] opacity-20" />
@@ -6,11 +12,7 @@ export default function Testimonial() {
       <div className="mx-auto max-w-2xl lg:max-w-4xl">
         <figure>
           <blockquote className="text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9">
-            <p>
-              "Компаниите с визия за бъдещето знаят, че развитието на таланта е
-              непрекъснат процес, а не еднократно събитие. Инвестицията в хората
-              е най-сигурният път към устойчив успех."
-            </p>
+            <p>&quot;{t("quote")}&quot;</p>
           </blockquote>
         </figure>
       </div>

@@ -1,20 +1,23 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "../i18n/navigation";
 
 const CookieConsent = dynamic(() => import("react-cookie-consent"), {
   ssr: false,
 });
 
 const CookieConsentBanner = () => {
+  const t = useTranslations("cookie");
+
   return (
     <CookieConsent
       location="bottom"
       cookieName="brdLawCookieConsent"
       expires={365}
-      buttonText="Приемам"
-      declineButtonText="Отказвам"
+      buttonText={t("accept")}
+      declineButtonText={t("decline")}
       enableDeclineButton
       style={{
         background: "#2B373B",
@@ -40,17 +43,11 @@ const CookieConsentBanner = () => {
         padding: "8px 16px",
         borderRadius: "6px",
       }}
-      onAccept={() => {
-        console.log("Потребителят е приел бисквитките");
-      }}
-      onDecline={() => {
-        console.log("Потребителят е отказал бисквитките");
-      }}
     >
       <p className="text-sm md:text-base">
-        Използваме бисквитки за подобряване на услугите.{" "}
+        {t("message")}{" "}
         <Link href="/privacy-policy" className="underline">
-          Научете повече
+          {t("learnMore")}
         </Link>
         .
       </p>

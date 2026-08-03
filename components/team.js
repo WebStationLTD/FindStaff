@@ -2,39 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { getMembers } from "../services/members";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "../i18n/navigation";
 
 export default function Team() {
+  const t = useTranslations("teamSection");
+  const locale = useLocale();
   const [members, setMembers] = useState([]);
 
-  // Fetch members from WordPress API on component mount
   useEffect(() => {
     const fetchMembers = async () => {
-      const membersData = await getMembers();
+      const res = await fetch(`/api/members?locale=${locale}`);
+      const membersData = await res.json();
       setMembers(membersData || []);
     };
 
     fetchMembers();
-  }, []);
+  }, [locale]);
 
   return (
     <div className="bg-white py-24 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-8xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl text-center">
-            Екип от експерти
+            {t("title")}
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 text-center">
-            Зад успеха на Find Staff стои екип от опитни професионалисти с богат
-            опит в международния подбор на персонал. Нашите консултанти владеят
-            множество езици и притежават задълбочени познания за пазарите на
-            труда в различни региони на света. Съчетаваме експертиза в човешките
-            ресурси, правни познания и разбиране на културните особености, за да
-            осигурим перфектно съответствие между компании и кандидати.
-            Поставяме акцент върху изграждането на дългосрочни отношения с
-            нашите клиенти, основани на доверие, професионализъм и постоянно
-            надминаване на очакванията.
+            {t("description")}
           </p>
         </div>
         <ul
@@ -52,13 +46,13 @@ export default function Team() {
                     quality={90}
                     priority={index < 3} // Приоритетно зареждане на първите 3 члена
                     loading={index < 3 ? "eager" : "lazy"}
-                    alt={member.name || "Член на екипа"}
+                    alt={member.name || t("memberFallback")}
                     src={member.profilepicture || "/placeholder.webp"}
                     className="rounded-2xl object-cover"
                     format="webp"
                   />
                   <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
-                    {member.name || "Член на екипа"}
+                    {member.name || t("memberFallback")}
                   </h3>
                   <p className="text-base/7 text-gray-600">
                     {member.position || ""}

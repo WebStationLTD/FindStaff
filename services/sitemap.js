@@ -1,19 +1,20 @@
-import { getPages } from './pages.js';
-import { getServices } from './services.js';
-import { getAllPosts } from './posts.js';
-import { getMembers } from './members.js';
+import { getPages } from "./pages.js";
+import { getServices } from "./services.js";
+import { getAllPosts } from "./posts.js";
+import { getMembers } from "./members.js";
+import {
+  getAllItalianServices,
+  getAllItalianPosts,
+} from "../lib/i18n/content.js";
+import { getServiceSlugForLocale } from "../lib/i18n/config.js";
 
-/**
- * Get all URLs for sitemap generation
- * @returns {Promise<Object>} Object containing all URLs organized by type
- */
 export const getAllSitemapUrls = async () => {
   try {
     const [pages, services, posts, members] = await Promise.all([
       getPages(),
       getServices(),
       getAllPosts(),
-      getMembers()
+      getMembers(),
     ]);
 
     return {
@@ -21,99 +22,155 @@ export const getAllSitemapUrls = async () => {
       services: services || [],
       posts: posts || [],
       members: members || [],
+      itServices: getAllItalianServices(),
+      itPosts: getAllItalianPosts(),
       staticPages: [
-        { slug: '', priority: '1.0', changefreq: 'daily' },
-        { slug: 'about', priority: '0.8', changefreq: 'weekly' },
-        { slug: 'services', priority: '0.9', changefreq: 'weekly' },
-        { slug: 'team', priority: '0.8', changefreq: 'weekly' },
-        { slug: 'blog', priority: '0.8', changefreq: 'daily' },
-        { slug: 'contact', priority: '0.7', changefreq: 'monthly' },
-        { slug: 'privacy-policy', priority: '0.3', changefreq: 'yearly' }
-      ]
+        { slug: "", priority: "1.0", changefreq: "daily" },
+        { slug: "about", priority: "0.8", changefreq: "weekly" },
+        { slug: "services", priority: "0.9", changefreq: "weekly" },
+        { slug: "team", priority: "0.8", changefreq: "weekly" },
+        { slug: "blog", priority: "0.8", changefreq: "daily" },
+        { slug: "contact", priority: "0.7", changefreq: "monthly" },
+        { slug: "privacy-policy", priority: "0.3", changefreq: "yearly" },
+      ],
     };
   } catch (error) {
-    console.error('Error fetching sitemap data:', error);
+    console.error("Error fetching sitemap data:", error);
     return {
       pages: [],
       services: [],
       posts: [],
       members: [],
+      itServices: getAllItalianServices(),
+      itPosts: getAllItalianPosts(),
       staticPages: [
-        { slug: '', priority: '1.0', changefreq: 'daily' },
-        { slug: 'about', priority: '0.8', changefreq: 'weekly' },
-        { slug: 'services', priority: '0.9', changefreq: 'weekly' },
-        { slug: 'team', priority: '0.8', changefreq: 'weekly' },
-        { slug: 'blog', priority: '0.8', changefreq: 'daily' },
-        { slug: 'contact', priority: '0.7', changefreq: 'monthly' },
-        { slug: 'privacy-policy', priority: '0.3', changefreq: 'yearly' }
-      ]
+        { slug: "", priority: "1.0", changefreq: "daily" },
+        { slug: "about", priority: "0.8", changefreq: "weekly" },
+        { slug: "services", priority: "0.9", changefreq: "weekly" },
+        { slug: "team", priority: "0.8", changefreq: "weekly" },
+        { slug: "blog", priority: "0.8", changefreq: "daily" },
+        { slug: "contact", priority: "0.7", changefreq: "monthly" },
+        { slug: "privacy-policy", priority: "0.3", changefreq: "yearly" },
+      ],
     };
   }
 };
 
-/**
- * Generate sitemap XML content
- * @param {string} baseUrl - Base URL of the website
- * @param {Object} data - Sitemap data
- * @returns {string} XML content
- */
-export const generateSitemapXML = (baseUrl, data) => {
-  const { staticPages, services, posts, members } = data;
-  
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+function urlEntry(loc, changefreq, priority, lastmod) {
+  return `
+  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod || new Date().toISOString()}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
 
-  // Add static pages
-  staticPages.forEach(page => {
-    const url = page.slug ? `${baseUrl}/${page.slug}` : baseUrl;
+export const generateSitemapXML = (baseUrl, data) => {
+  const {
+    staticPages,
+    services,
+    posts,
+    members,
+    itServices = [],
+    itPosts = [],
+  } = data;
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
+
+  staticPages.forEach((page) => {
+    const bgUrl = page.slug ? `${baseUrl}/${page.slug}` : baseUrl;
+    const itUrl = page.slug ? `${baseUrl}/it/${page.slug}` : `${baseUrl}/it`;
     xml += `
   <url>
-    <loc>${url}</loc>
+    <loc>${bgUrl}</loc>
+    <xhtml:link rel="alternate" hreflang="bg" href="${bgUrl}" />
+    <xhtml:link rel="alternate" hreflang="it" href="${itUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${bgUrl}" />
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`;
+    xml += urlEntry(itUrl, page.changefreq, page.priority);
   });
 
-  // Add services
   if (services && services.length > 0) {
-    services.forEach(service => {
+    services.forEach((service) => {
+      const bgUrl = `${baseUrl}/services/${service.slug}`;
+      const itSlug = getServiceSlugForLocale(service.slug, "it");
+      const itUrl = `${baseUrl}/it/services/${itSlug}`;
       xml += `
   <url>
-    <loc>${baseUrl}/services/${service.slug}</loc>
+    <loc>${bgUrl}</loc>
+    <xhtml:link rel="alternate" hreflang="bg" href="${bgUrl}" />
+    <xhtml:link rel="alternate" hreflang="it" href="${itUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${bgUrl}" />
     <lastmod>${new Date(service.date || Date.now()).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`;
+      xml += urlEntry(
+        itUrl,
+        "weekly",
+        "0.8",
+        new Date(service.date || Date.now()).toISOString()
+      );
     });
   }
 
-  // Add blog posts
   if (posts && posts.length > 0) {
-    posts.forEach(post => {
+    posts.forEach((post) => {
+      const sourceSlug = decodeURIComponent(post.slug);
+      const bgUrl = `${baseUrl}/blog/${sourceSlug}`;
+      const itPost = (itPosts || []).find((p) => p.sourceSlug === sourceSlug);
+      // Only emit IT hreflang/URL when a real IT translation exists (protects BG SEO)
+      const itUrl = itPost
+        ? `${baseUrl}/it/blog/${itPost.slugIt}`
+        : null;
       xml += `
   <url>
-    <loc>${baseUrl}/blog/${post.slug}</loc>
+    <loc>${bgUrl}</loc>
+    <xhtml:link rel="alternate" hreflang="bg" href="${bgUrl}" />
+    ${
+      itUrl
+        ? `<xhtml:link rel="alternate" hreflang="it" href="${itUrl}" />`
+        : ""
+    }
+    <xhtml:link rel="alternate" hreflang="x-default" href="${bgUrl}" />
     <lastmod>${new Date(post.date || Date.now()).toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>`;
+      if (itUrl) {
+        xml += urlEntry(
+          itUrl,
+          "monthly",
+          "0.6",
+          new Date(post.date || Date.now()).toISOString()
+        );
+      }
     });
   }
 
-  // Add team members
   if (members && members.length > 0) {
-    members.forEach(member => {
+    members.forEach((member) => {
+      const bgUrl = `${baseUrl}/team/${member.slug}`;
+      const itUrl = `${baseUrl}/it/team/${member.slug}`;
       xml += `
   <url>
-    <loc>${baseUrl}/team/${member.slug}</loc>
+    <loc>${bgUrl}</loc>
+    <xhtml:link rel="alternate" hreflang="bg" href="${bgUrl}" />
+    <xhtml:link rel="alternate" hreflang="it" href="${itUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${bgUrl}" />
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>`;
+      xml += urlEntry(itUrl, "monthly", "0.6");
     });
   }
 
-  xml += '\n</urlset>';
+  xml += "\n</urlset>";
   return xml;
 };

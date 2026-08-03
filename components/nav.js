@@ -24,12 +24,15 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import Link from "next/link";
 import Image from "next/image";
-import { getServicesNav } from "../services/services";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "../i18n/navigation";
 import { searchContent } from "../services/search";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navigation() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,28 +44,44 @@ export default function Navigation() {
     categories: [
       {
         id: "categories",
-        name: "Услуги",
+        name: t("services"),
         featured: [],
         services: [],
       },
     ],
     pages: [
-      { name: "Начало", href: "/" },
-      { name: "За нас", href: "/about" },
-      { name: "Екип", href: "/team" },
-      { name: "Блог", href: "/blog" },
-      { name: "Контакти", href: "/contact" },
+      { name: t("home"), href: "/" },
+      { name: t("about"), href: "/about" },
+      { name: t("team"), href: "/team" },
+      { name: t("blog"), href: "/blog" },
+      { name: t("contact"), href: "/contact" },
     ],
   });
+
+  useEffect(() => {
+    setNavigation((prev) => ({
+      ...prev,
+      pages: [
+        { name: t("home"), href: "/" },
+        { name: t("about"), href: "/about" },
+        { name: t("team"), href: "/team" },
+        { name: t("blog"), href: "/blog" },
+        { name: t("contact"), href: "/contact" },
+      ],
+      categories: prev.categories.map((c) => ({ ...c, name: t("services") })),
+    }));
+  }, [t, locale]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const services = await getServicesNav();
+        const res = await fetch(`/api/services-nav?locale=${locale}`);
+        const services = await res.json();
 
         if (!services || !Array.isArray(services) || services.length === 0) {
           console.warn("No services found from API");
+          setLoading(false);
           return;
         }
 
@@ -74,18 +93,18 @@ export default function Navigation() {
           categories: [
             {
               id: "categories",
-              name: "Услуги",
+              name: t("services"),
               featured: featured.map((service) => ({
-                name: service.title.rendered,
+                name: service.title?.rendered || service.title,
                 href: `/services/${service.slug}`,
                 imageSrc:
                   service.yoast_head_json?.og_image?.[0]?.url ||
                   "/placeholder.webp",
-                imageAlt: service.title.rendered,
+                imageAlt: service.title?.rendered || service.title,
               })),
               services: remainingServices.map((service) => ({
                 id: service.id,
-                name: service.title.rendered,
+                name: service.title?.rendered || service.title,
                 href: `/services/${service.slug}`,
               })),
             },
@@ -94,11 +113,12 @@ export default function Navigation() {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching navigation data:", error);
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [locale, t]);
 
   useEffect(() => {
     if (searchQuery.length < 3) {
@@ -159,18 +179,13 @@ export default function Navigation() {
               </a>
             </div>
 
-            <div className="flex space-x-8">
-              {/* Адрес */}
+            <div className="flex items-center space-x-6">
               <div className="flex items-center text-sm text-gray-600">
                 <FaMapMarkerAlt className="mr-2 text-[#005e9e]" />
-                <span suppressHydrationWarning>
-                  гр. София, ул. Рачо Димчев 2
-                </span>
+                <span suppressHydrationWarning>{t("address")}</span>
               </div>
-
-              {/* Instagram линк */}
               <a
-                href="#"
+                href="https://www.instagram.com/findstaff.bg/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-sm text-gray-600 hover:text-[#005e9e] transition-colors"
@@ -178,6 +193,7 @@ export default function Navigation() {
                 <FaInstagram className="mr-2 text-[#005e9e]" />
                 <span suppressHydrationWarning>Instagram</span>
               </a>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -207,7 +223,7 @@ export default function Navigation() {
                   className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
                 >
                   <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Close menu</span>
+                  <span className="sr-only">{t("closeMenu")}</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
                 </button>
                 <div className="ml-4">
@@ -226,7 +242,7 @@ export default function Navigation() {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="Търсене..."
+                    placeholder={t("search")}
                     value={searchQuery}
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
@@ -247,7 +263,7 @@ export default function Navigation() {
                   <div className="mt-1 bg-white shadow-lg rounded-md max-h-40 overflow-y-auto border border-gray-200">
                     {isSearching ? (
                       <div className="p-1 text-gray-500 text-xs text-center">
-                        Зареждане...
+                        {t("loading")}
                       </div>
                     ) : searchResults.length > 0 ? (
                       <ul className="divide-y divide-gray-200">
@@ -274,11 +290,14 @@ export default function Navigation() {
                       </ul>
                     ) : (
                       <div className="p-1 text-gray-500 text-xs text-center">
-                        Няма намерени резултати
+                        {t("noResults")}
                       </div>
                     )}
                   </div>
                 )}
+                <div className="mt-3 flex justify-center lg:hidden">
+                  <LanguageSwitcher />
+                </div>
               </div>
 
               {/* Links */}
@@ -360,7 +379,7 @@ export default function Navigation() {
                   className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
                 >
                   <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open menu</span>
+                  <span className="sr-only">{t("openMenu")}</span>
                   <Bars3Icon aria-hidden="true" className="size-6" />
                 </button>
 
@@ -478,7 +497,7 @@ export default function Navigation() {
                   <div className="relative w-full lg:w-72">
                     <input
                       type="text"
-                      placeholder="Търсене..."
+                      placeholder={t("search")}
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
@@ -497,7 +516,7 @@ export default function Navigation() {
                     <div className="absolute right-0 w-44 sm:w-48 lg:w-72 mt-2 bg-white shadow-lg rounded-md max-h-48 sm:max-h-56 lg:max-h-60 overflow-y-auto border border-gray-200">
                       {isSearching ? (
                         <div className="p-2 text-gray-500 text-sm text-center">
-                          Зареждане...
+                          {t("loading")}
                         </div>
                       ) : searchResults.length > 0 ? (
                         <ul className="divide-y divide-gray-200">
@@ -523,7 +542,7 @@ export default function Navigation() {
                         </ul>
                       ) : (
                         <div className="p-2 text-gray-500 text-sm text-center">
-                          Няма намерени резултати
+                          {t("noResults")}
                         </div>
                       )}
                     </div>

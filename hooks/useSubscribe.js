@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
 export default function useSubscribe() {
+  const t = useTranslations("subscribe");
   const [loading, setLoading] = useState(false);
 
   const subscribe = async (email, clearInput) => {
@@ -11,8 +13,8 @@ export default function useSubscribe() {
     if (!email) {
       Swal.fire({
         icon: "error",
-        title: "Грешка при абонирането!",
-        text: "Моля, въведете валиден имейл адрес.",
+        title: t("errorTitle"),
+        text: t("errorEmail"),
       });
       setLoading(false);
       return;
@@ -26,25 +28,25 @@ export default function useSubscribe() {
       });
 
       if (res.ok) {
-        clearInput(); // Clear input field
+        clearInput();
         Swal.fire({
           icon: "success",
-          title: "Успешен абонамент!",
-          text: "Вие се абонирахте успешно за нашия бюлетин. Очаквайте новини и актуализации на вашия имейл!",
+          title: t("successTitle"),
+          text: t("successText"),
           timer: 4000,
         });
       } else {
         Swal.fire({
           icon: "error",
-          title: "Грешка при абонирането!",
-          text: "Моля, опитайте отново по-късно.",
+          title: t("retryTitle"),
+          text: t("retryText"),
         });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Неуспешно абониране!",
-        text: "Проверете връзката с интернет и опитайте отново.",
+        title: t("failTitle"),
+        text: t("failText"),
       });
     }
     setLoading(false);
