@@ -286,7 +286,8 @@
   },
   "contactPage": {
     "hint": "Potete richiedere personale nella sezione Servizi, dopo aver scelto il tipo di lavoratore che desiderate assumere.",
-    "mapTitle": "Trovateci sulla mappa"
+    "mapTitle": "Trovateci sulla mappa",
+    "address": "Sofia, via Racho Dimchev 2"
   },
   "common": {
     "backToTop": "Torna su",

@@ -78,7 +78,7 @@ export default async function ContactPage({ params }) {
                     <dt className="flex-none">
                       <BuildingOffice2Icon className="h-7 w-6 text-gray-400" />
                     </dt>
-                    <dd>{contactInfo.address}</dd>
+                    <dd>{tPage("address")}</dd>
                   </div>
                   <div className="flex gap-x-4">
                     <dt className="flex-none">
