@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
     "sync:it-posts": "node scripts/sync-it-posts.mjs",
-    "prebuild": "node scripts/build-post-slug-map.mjs && node scripts/sync-it-posts.mjs",
+    "prebuild": "node scripts/build-post-slug-map.mjs && node scripts/sync-it-posts.mjs || echo \"[prebuild] IT post sync skipped\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,8 +15,6 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "@swc/core": "^1.15.47",
-    "@swc/core-win32-x64-msvc": "^1.15.47",
     "@tailwindcss/postcss": "^4.0.9",
     "@tailwindcss/typography": "^0.5.16",
     "critters": "^0.0.23",
@@ -36,8 +34,5 @@
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "eslint-config-next": "15.1.7"
-  },
-  "optionalDependencies": {
-    "@swc/wasm": "^1.15.47"
   }
 }
