@@ -94,19 +94,33 @@ export default function Navigation() {
             {
               id: "categories",
               name: t("services"),
-              featured: featured.map((service) => ({
-                name: service.title?.rendered || service.title,
-                href: `/services/${service.slug}`,
-                imageSrc:
-                  service.yoast_head_json?.og_image?.[0]?.url ||
-                  "/placeholder.webp",
-                imageAlt: service.title?.rendered || service.title,
-              })),
-              services: remainingServices.map((service) => ({
-                id: service.id,
-                name: service.title?.rendered || service.title,
-                href: `/services/${service.slug}`,
-              })),
+              featured: featured.map((service) => {
+                const name =
+                  (typeof service.title?.rendered === "string" &&
+                    service.title.rendered) ||
+                  (typeof service.title === "string" ? service.title : "") ||
+                  "";
+                return {
+                  name,
+                  href: `/services/${service.slug}`,
+                  imageSrc:
+                    service.yoast_head_json?.og_image?.[0]?.url ||
+                    "/placeholder.webp",
+                  imageAlt: name,
+                };
+              }),
+              services: remainingServices.map((service) => {
+                const name =
+                  (typeof service.title?.rendered === "string" &&
+                    service.title.rendered) ||
+                  (typeof service.title === "string" ? service.title : "") ||
+                  "";
+                return {
+                  id: service.id,
+                  name,
+                  href: `/services/${service.slug}`,
+                };
+              }),
             },
           ],
         }));

@@ -60,7 +60,11 @@ export default function Footer() {
         const servicesData = await res.json();
         if (servicesData && Array.isArray(servicesData)) {
           const formattedServices = servicesData.map((service) => ({
-            name: service.title?.rendered || service.title,
+            name:
+              (typeof service.title?.rendered === "string" &&
+                service.title.rendered) ||
+              (typeof service.title === "string" ? service.title : "") ||
+              "",
             href: `/services/${service.slug}`,
           }));
           setServices(formattedServices);

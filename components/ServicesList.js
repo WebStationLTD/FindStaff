@@ -86,13 +86,16 @@ export default function ServicesList({ services }) {
                     quality={85}
                     priority={index === 0}
                     loading={index === 0 ? "eager" : "lazy"}
-                    alt={service.title.rendered}
+                    alt={
+                      (typeof service.title?.rendered === "string" &&
+                        service.title.rendered) ||
+                      "FindStaff"
+                    }
                     src={
                       service.yoast_head_json?.og_image?.[0]?.url ||
                       "/placeholder.webp"
                     }
                     className="absolute inset-0 size-full rounded-2xl bg-gray-50 object-cover"
-                    format="webp"
                     decoding={index === 0 ? "sync" : "async"}
                     fetchPriority={index === 0 ? "high" : "auto"}
                   />
@@ -107,10 +110,13 @@ export default function ServicesList({ services }) {
                   <div className="group relative max-w-[100%]">
                     <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
                       <span className="absolute inset-0" />
-                      {service.title.rendered}
+                      {(typeof service.title?.rendered === "string" &&
+                        service.title.rendered) ||
+                        ""}
                     </h3>
                     <p className="mt-5 text-md/6 text-gray-600">
-                      {service.content.rendered
+                      {typeof service.content?.rendered === "string" &&
+                      service.content.rendered
                         ? service.content.rendered
                             .replace(/<[^>]+>/g, "")
                             .substring(0, 450) + "..."

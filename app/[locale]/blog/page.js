@@ -100,8 +100,14 @@ export default async function Blog({ params, searchParams }) {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {posts.map((post) => {
-              const title = post.title?.rendered || post.title || "";
-              const content = post.content?.rendered || post.content || "";
+              const rawTitle = post.title?.rendered ?? post.title;
+              const title =
+                typeof rawTitle === "string" && rawTitle.trim()
+                  ? rawTitle
+                  : "";
+              const rawContent = post.content?.rendered ?? post.content;
+              const content =
+                typeof rawContent === "string" ? rawContent : "";
               const image =
                 post.ogImage ||
                 post.yoast_head_json?.og_image?.[0]?.url ||
@@ -116,7 +122,7 @@ export default async function Blog({ params, searchParams }) {
                     <Image
                       width={400}
                       height={225}
-                      alt={title}
+                      alt={title || "FindStaff"}
                       src={image}
                       className="aspect-video w-full rounded-2xl bg-gray-100 object-cover"
                     />

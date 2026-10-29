@@ -14,10 +14,16 @@ export default function LatestPosts() {
   useEffect(() => {
     setLoading(true);
     const fetchLatestPosts = async () => {
-      const res = await fetch(`/api/latest-posts?locale=${locale}`);
-      const postsData = await res.json();
-      setPosts(postsData || []);
-      setLoading(false);
+      try {
+        const res = await fetch(`/api/latest-posts?locale=${locale}`);
+        const postsData = await res.json();
+        setPosts(Array.isArray(postsData) ? postsData : []);
+      } catch (error) {
+        console.error("Failed to load latest posts:", error);
+        setPosts([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchLatestPosts();
@@ -40,8 +46,14 @@ export default function LatestPosts() {
             <div className="mx-auto mt-16 grid !max-w-[80%] grid-cols-1 gap-x-8 gap-y-20 lg:mx-auto lg:max-w-none lg:grid-cols-3">
               {posts.length > 0 ? (
                 posts.map((post, index) => {
-                  const title = post.title?.rendered || post.title || "";
-                  const content = post.content?.rendered || post.content || "";
+                  const rawTitle = post.title?.rendered ?? post.title;
+                  const title =
+                    typeof rawTitle === "string" && rawTitle.trim()
+                      ? rawTitle
+                      : "";
+                  const rawContent = post.content?.rendered ?? post.content;
+                  const content =
+                    typeof rawContent === "string" ? rawContent : "";
                   const ogImage =
                     post.ogImage ||
                     post.yoast_head_json?.og_image?.[0]?.url ||
@@ -50,7 +62,7 @@ export default function LatestPosts() {
                   return (
                     <Link
                       href={`/blog/${post.slug}`}
-                      key={post.id}
+                      key={post.id || post.slug || index}
                       prefetch={true}
                     >
                       <article className="flex flex-col items-start justify-between">
@@ -62,10 +74,9 @@ export default function LatestPosts() {
                             quality={85}
                             priority={index === 0}
                             loading={index === 0 ? "eager" : "lazy"}
-                            alt={title}
+                            alt={title || "FindStaff"}
                             src={ogImage}
                             className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2"
-                            format="webp"
                           />
                           <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
                         </div>

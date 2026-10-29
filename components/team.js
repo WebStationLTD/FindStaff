@@ -49,7 +49,6 @@ export default function Team() {
                     alt={member.name || t("memberFallback")}
                     src={member.profilepicture || "/placeholder.webp"}
                     className="rounded-2xl object-cover"
-                    format="webp"
                   />
                   <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
                     {member.name || t("memberFallback")}

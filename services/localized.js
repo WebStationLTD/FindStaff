@@ -33,26 +33,40 @@ function stripHtml(html = "") {
     .trim();
 }
 
+/** Safely read WP title/content fields — empty rendered must not fall back to the object. */
+function wpText(field, fallback = "") {
+  if (field == null) return fallback;
+  if (typeof field === "string") return field;
+  if (typeof field === "object" && typeof field.rendered === "string") {
+    return field.rendered;
+  }
+  return fallback;
+}
+
+function titleFromContent(html = "") {
+  const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  if (!h1) return "";
+  return stripHtml(h1[1]);
+}
+
 /** Normalize WP service into a common shape */
 function mapWpService(service, locale = "bg") {
   if (!service) return null;
   const meta = service.yoast_head_json || {};
+  const title = wpText(service.title);
   return {
     id: service.id,
     sourceSlug: service.slug,
     slug: getServiceSlugForLocale(service.slug, locale),
-    title: service.title?.rendered || service.title || "",
-    excerpt: convertBgnPricesInHtml(service.excerpt?.rendered || "", locale),
-    content: convertBgnPricesInHtml(service.content?.rendered || "", locale),
+    title,
+    excerpt: convertBgnPricesInHtml(wpText(service.excerpt), locale),
+    content: convertBgnPricesInHtml(wpText(service.content), locale),
     date: service.date,
-    metaTitle: meta.title || service.title?.rendered || "",
+    metaTitle: meta.title || title || "",
     metaDescription:
       meta.description ||
-      stripHtml(service.excerpt?.rendered || service.content?.rendered || "").slice(
-        0,
-        160
-      ),
-    ogTitle: meta.og_title || meta.title || "",
+      stripHtml(wpText(service.excerpt) || wpText(service.content)).slice(0, 160),
+    ogTitle: meta.og_title || meta.title || title || "",
     ogDescription: meta.og_description || meta.description || "",
     ogImage: meta.og_image?.[0]?.url || "",
     yoast_head_json: meta,
@@ -89,17 +103,23 @@ function mapWpPost(post, locale = "bg") {
   if (!post) return null;
   const meta = post.yoast_head_json || {};
   const sourceSlug = decodeURIComponent(post.slug);
+  const contentHtml = wpText(post.content);
+  const title =
+    wpText(post.title).trim() ||
+    titleFromContent(contentHtml) ||
+    meta.title ||
+    sourceSlug;
   return {
     id: post.id,
     sourceSlug,
     slug: getPostSlugForLocale(sourceSlug, locale),
-    title: post.title?.rendered || post.title || "",
-    excerpt: convertBgnPricesInHtml(post.excerpt?.rendered || "", locale),
-    content: convertBgnPricesInHtml(post.content?.rendered || "", locale),
+    title,
+    excerpt: convertBgnPricesInHtml(wpText(post.excerpt), locale),
+    content: convertBgnPricesInHtml(contentHtml, locale),
     date: post.date,
-    metaTitle: meta.title || post.title?.rendered || "",
+    metaTitle: meta.title || title,
     metaDescription: meta.description || "",
-    ogTitle: meta.og_title || meta.title || "",
+    ogTitle: meta.og_title || meta.title || title,
     ogDescription: meta.og_description || meta.description || "",
     ogImage: meta.og_image?.[0]?.url || "",
     yoast_head_json: meta,
